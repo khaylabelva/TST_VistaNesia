@@ -63,7 +63,7 @@ export default function Home() {
       </div>
 
       {/* Page 2 */}
-      <div className="relative pt-20 pb-5 bg-white snap-start flex flex-col items-center">
+      <div className="relative pt-20 pb-10 bg-white snap-start flex flex-col items-center">
         <div className="w-full px-6 md:px-40 mb-10">
           <div className="text-gray-600 mb-2">
             Best Location
@@ -122,6 +122,80 @@ export default function Home() {
           ))}
         </div>
       </div>
+      {/* Page 3 */}
+        <div className="relative pt-20 pb-10 bg-white snap-start flex flex-col md:flex-row items-center px-6 md:px-20 gap-10">
+          {/* Gambar di sebelah kiri */}
+          <div className="relative w-full md:w-1/2 max-h-screen">
+            <img
+              src="/image.jpg"
+              alt="Exploration"
+              className="rounded-xl shadow-lg object-cover max-w-[80vh] max-h-[80vh]"
+            />
+            {/* Overlay konten di bawah gambar */}
+            <div className="absolute bottom-6 left-6 bg-white/80 backdrop-blur-md p-4 rounded-lg shadow-md flex gap-4 items-center">
+              <select className="bg-transparent text-gray-700 text-sm border-none focus:ring-0">
+                <option>Date</option>
+              </select>
+              <select className="bg-transparent text-gray-700 text-sm border-none focus:ring-0">
+                <option>Budget</option>
+              </select>
+              <select className="bg-transparent text-gray-700 text-sm border-none focus:ring-0">
+                <option>Guest</option>
+              </select>
+              <button className="bg-black text-white text-sm px-4 py-2 rounded-lg shadow-md hover:bg-gray-800">
+                Search
+              </button>
+            </div>
+            {/* Caption di bawah gambar */}
+            <p className="mt-4 text-sm text-gray-600">
+              Embark on a journey to find your dream destination, where adventure and relaxation await, creating unforgettable memories along the way.
+            </p>
+          </div>
+
+          {/* Konten di sebelah kanan */}
+          <div className="w-full md:w-1/2">
+            <h3 className="text-gray-400 text-sm font-medium mb-2">How it works</h3>
+            <h2 className="text-3xl font-bold text-gray-800 mb-8">One click for you</h2>
+            <div className="space-y-6">
+              {[
+                {
+                  title: "Find your destination",
+                  description:
+                    "Embark on a journey to discover your dream destination, where adventure and relaxation await.",
+                  icon: "🔍",
+                },
+                {
+                  title: "Book a ticket",
+                  description:
+                    "Ensure a smooth travel experience by booking tickets to your preferred destination via our booking platform.",
+                  icon: "✈️",
+                },
+                {
+                  title: "Make payment",
+                  description:
+                    "We offer a variety of payment options to meet your preferences and ensure a hassle-free transaction process.",
+                  icon: "💳",
+                },
+                {
+                  title: "Explore destination",
+                  description:
+                    "You'll be immersed in a captivating tapestry of sights, sounds and tastes, as you wind your way through the ancient streets.",
+                  icon: "🗺️",
+                },
+              ].map((item, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  {/* Icon */}
+                  <div className="text-xl">{item.icon}</div>
+                  {/* Text */}
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-800">{item.title}</h4>
+                    <p className="text-gray-600 text-sm">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
     </div>
   );
 }
