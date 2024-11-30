@@ -63,12 +63,18 @@ export default function Home() {
       </div>
 
       {/* Page 2 */}
-      <div className="relative py-16 bg-white snap-start flex flex-col items-center">
-        <h2 className="text-3xl font-bold mb-4 text-gray-800">Indonesian Tourism</h2>
-        <p className="text-gray-600 text-center mb-10 px-4">
-          Extraordinary natural beauty, enjoy the rich culture, and experience the friendliness of the local people.
-        </p>
+      <div className="relative pt-28 pb-5 bg-white snap-start flex flex-col items-center">
+      <div className="flex flex-col md:flex-row md:justify-between w-full px-6 md:px-40 mb-10 md:gap-x-4">
+        {/* Judul di sebelah kiri */}
+        <h2 className="text-3xl font-bold text-gray-800 md:mb-0">
+          Indonesian Tourism
+        </h2>
 
+        {/* Paragraf di sebelah kanan */}
+        <p className="text-gray-600 md:text-left">
+          Extraordinary natural beauty, enjoy the rich culture, <br /> and experience the friendliness of the local people.
+        </p>
+      </div>
         <div className="grid grid-cols-4 gap-6 px-6 md:px-20">
           {[
             {
@@ -90,15 +96,15 @@ export default function Home() {
               classes: "col-span-4 md:col-span-1",
             },
             {
-              title: "Borobudur Temple Tour",
-              location: "Jogjakarta, Central Java",
+              title: "Sengkedan Perkebunan Teh",
+              location: "Rancabali, West Java",
               image: "/bandung.jpg",
               classes: "col-span-4 md:col-span-3",
             },
           ].map((item, index) => (
             <div
               key={index}
-              className={`relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 ${item.classes}`}
+              className={`relative rounded-lg overflow-hidden shadow-xl transition-all duration-300 ${item.classes}`}
             >
               <img
                 src={item.image}
