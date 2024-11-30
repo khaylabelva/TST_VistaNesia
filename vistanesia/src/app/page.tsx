@@ -63,47 +63,51 @@ export default function Home() {
       </div>
 
       {/* Page 2 */}
-      <div className="relative h-screen bg-white snap-start flex flex-col items-center">
-        <h2 className="text-3xl font-bold mt-10 text-gray-800">Indonesian Tourism</h2>
-        <p className="text-gray-600 text-center mt-2 mb-8 px-4">
+      <div className="relative py-16 bg-white snap-start flex flex-col items-center">
+        <h2 className="text-3xl font-bold mb-4 text-gray-800">Indonesian Tourism</h2>
+        <p className="text-gray-600 text-center mb-10 px-4">
           Extraordinary natural beauty, enjoy the rich culture, and experience the friendliness of the local people.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-20">
+        <div className="grid grid-cols-4 gap-6 px-6 md:px-20">
           {[
             {
-              title: "Bromo Tengger Tour",
-              location: "Bromo, East Java",
+              title: "Borobudur Temple",
+              location: "Jogjakarta, Central Java",
               image: "/borobudur.jpg",
+              classes: "col-span-4 md:col-span-3",
             },
             {
-              title: "Bali Beach Tourism",
-              location: "Denpasar, Bali",
+              title: "Ulun Danu",
+              location: "Tabanan, Bali",
               image: "/bali.jpg",
+              classes: "col-span-4 md:col-span-1",
             },
             {
-              title: "Sumatra Tourism",
-              location: "Lampung, South Sumatra",
+              title: "Raja Ampat",
+              location: "Raja Ampat, Papua",
               image: "/rajaampat.jpg",
+              classes: "col-span-4 md:col-span-1",
             },
             {
               title: "Borobudur Temple Tour",
               location: "Jogjakarta, Central Java",
               image: "/bandung.jpg",
+              classes: "col-span-4 md:col-span-3",
             },
           ].map((item, index) => (
             <div
               key={index}
-              className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+              className={`relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 ${item.classes}`}
             >
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-56 object-cover"
+                className="w-full h-52 object-cover"
               />
               <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-4 text-white">
-                <h3 className="text-lg font-bold">{item.title}</h3>
                 <p className="text-sm text-gray-300">{item.location}</p>
+                <h3 className="text-lg font-bold mt-1">{item.title}</h3>
               </div>
             </div>
           ))}
