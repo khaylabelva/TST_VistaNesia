@@ -37,10 +37,10 @@ export default function Home() {
         {/* Main Content */}
         <div className="relative h-full flex flex-col justify-center items-center text-center text-white px-4">
           <h1 className="text-4xl md:text-6xl mt-20 font-extrabold leading-tight">
-            Extraordinary natural and <br /> cultural charm
+            Extraordinary Natural <br /> and Cultural Charm
           </h1>
           <p className="mt-4 text-lg text-white">
-            Exploring Indonesia is an unforgettable adventure.
+            Exploring Indonesia is an unforgettable adventure
           </p>
 
           {/* Info Cards */}
@@ -63,18 +63,21 @@ export default function Home() {
       </div>
 
       {/* Page 2 */}
-      <div className="relative pt-28 pb-5 bg-white snap-start flex flex-col items-center">
-      <div className="flex flex-col md:flex-row md:justify-between w-full px-6 md:px-40 mb-10 md:gap-x-4">
-        {/* Judul di sebelah kiri */}
-        <h2 className="text-3xl font-bold text-gray-800 md:mb-0">
-          Indonesian Tourism
-        </h2>
-
-        {/* Paragraf di sebelah kanan */}
-        <p className="text-gray-600 md:text-left">
-          Extraordinary natural beauty, enjoy the rich culture, <br /> and experience the friendliness of the local people.
-        </p>
-      </div>
+      <div className="relative pt-20 pb-5 bg-white snap-start flex flex-col items-center">
+        <div className="w-full px-6 md:px-40 mb-10">
+          <div className="text-gray-600 mb-2">
+            Best Location
+          </div>
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center md:gap-x-4">
+            <h2 className="text-3xl font-bold text-gray-800 md:mb-0">
+              Indonesian Tourism
+            </h2>
+            <p className="text-gray-600 md:text-left">
+              Extraordinary natural beauty, enjoy the rich culture, <br />
+              and experience the friendliness of the local people.
+            </p>
+          </div>
+        </div>
         <div className="grid grid-cols-4 gap-6 px-6 md:px-20">
           {[
             {
@@ -84,15 +87,15 @@ export default function Home() {
               classes: "col-span-4 md:col-span-3",
             },
             {
-              title: "Ulun Danu",
-              location: "Tabanan, Bali",
-              image: "/bali.jpg",
-              classes: "col-span-4 md:col-span-1",
-            },
-            {
               title: "Raja Ampat",
               location: "Raja Ampat, Papua",
               image: "/rajaampat.jpg",
+              classes: "col-span-4 md:col-span-1",
+            },
+            {
+              title: "Ulun Danu",
+              location: "Tabanan, Bali",
+              image: "/bali.jpg",
               classes: "col-span-4 md:col-span-1",
             },
             {
