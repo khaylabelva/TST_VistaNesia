@@ -12,7 +12,7 @@ export default function Home() {
         </div>
         <nav className="absolute top-6 left-0 w-full flex items-center justify-between px-8">
           <div className="font-bold text-lg text-white">VISTANESIA</div>
-          <div className="bg-gray-300/50 px-10 py-2 rounded-full flex gap-12 justify-center items-center mx-auto border border-white">
+          <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-gray-300/50 px-10 py-2 rounded-full flex gap-12 justify-center items-center border border-white">
             <a href="#about" className="text-white text-sm font-medium hover:text-gray-300">
               About
             </a>
@@ -126,16 +126,16 @@ export default function Home() {
           />
           <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-[90%] bg-gray-500/60 py-2 px-5 rounded-full mx-auto border border-white">
             <div className="flex gap-3 items-center">
-              <select className="bg-transparent text-white text-xs border border-gray-300 rounded-md py-0.5 px-1.5 focus:ring-2 focus:ring-gray-500 w-full">
+              <select className="bg-transparent text-white text-xs border border-gray-300 rounded-md py-0.5 px-1.5 focus:ring-2 focus:ring-gray-500 w-full pointer-events-none">
                 <option>Date</option>
               </select>
-              <select className="bg-transparent text-white text-xs border border-gray-300 rounded-md py-0.5 px-1.5 focus:ring-2 focus:ring-gray-500 w-full">
+              <select className="bg-transparent text-white text-xs border border-gray-300 rounded-md py-0.5 px-1.5 focus:ring-2 focus:ring-gray-500 w-full pointer-events-none">
                 <option>Budget</option>
               </select>
-              <select className="bg-transparent text-white text-xs border border-gray-300 rounded-md py-0.5 px-1.5 focus:ring-2 focus:ring-gray-500 w-full">
+              <select className="bg-transparent text-white text-xs border border-gray-300 rounded-md py-0.5 px-1.5 focus:ring-2 focus:ring-gray-500 w-full pointer-events-none">
                 <option>Guest</option>
               </select>
-              <button className="bg-black text-white text-xs px-4 py-1.5 rounded-md shadow-md hover:bg-gray-800">
+              <button className="bg-black text-white text-xs px-4 py-1.5 rounded-md shadow-md pointer-events-none">
                 Search
               </button>
             </div>
@@ -171,7 +171,7 @@ export default function Home() {
             ].map((item, index) => (
               <div
                 key={index}
-                className="group flex items-center gap-7 bg-white p-4 rounded-xl shadow-xl transition-transform transform hover:scale-105 hover:shadow-2xl hover:bg-white"
+                className="group flex items-center gap-7 bg-white p-4 rounded-xl shadow-xl transition-transform transform hover:scale-105 hover:shadow-2xl hover:bg-stone-50"
               >
                 <div className="w-14 h-14">
                   <img
