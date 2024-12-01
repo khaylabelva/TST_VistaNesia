@@ -1,4 +1,13 @@
+'use client';
+import { useRouter } from 'next/navigation';
+
 export default function Home() {
+  const router = useRouter();
+  const handleLoginClick = () => {
+    console.log('Login button clicked');
+    router.push('/login');
+  };
+
   return (
     <div className="relative">
       {/* Page 1 */}
@@ -13,20 +22,25 @@ export default function Home() {
         <nav className="absolute top-6 left-0 w-full flex items-center justify-between px-8">
           <div className="font-bold text-lg text-white">VISTANESIA</div>
           <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-gray-300/50 px-10 py-2 rounded-full flex gap-12 justify-center items-center border border-white">
-            <a href="#about" className="text-white text-sm font-medium hover:text-gray-300">
+            <a href="#about" className="text-white text-sm font-medium hover:text-gray-900 transition-all duration-300 ease-in-out">
               About
             </a>
-            <a href="#services" className="text-white text-sm font-medium hover:text-gray-300">
+            <a href="#services" className="text-white text-sm font-medium hover:text-gray-900 transition-all duration-300 ease-in-out">
               Services
             </a>
-            <a href="#tour" className="text-white text-sm font-medium hover:text-gray-300">
+            <a href="#tour" className="text-white text-sm font-medium hover:text-gray-900 transition-all duration-300 ease-in-out">
               Tour
             </a>
-            <a href="#contact" className="text-white text-sm font-medium hover:text-gray-300">
+            <a href="#contact" className="text-white text-sm font-medium hover:text-gray-900 transition-all duration-300 ease-in-out">
               Contact
             </a>
           </div>
-          <button className="bg-white text-black text-sm px-5 py-2 rounded-full shadow-md">
+          <button
+            onClick={handleLoginClick}
+            className="bg-white text-black text-sm px-6 py-2 rounded-full shadow-md z-50 
+              hover:bg-black hover:text-white hover:shadow-lg 
+              transition-all duration-300 ease-in-out"
+          >
             Login
           </button>
         </nav>
