@@ -3,7 +3,6 @@ export default function Home() {
     <div className="relative">
       {/* Page 1 */}
       <div className="relative h-screen snap-start">
-        {/* Background image */}
         <div className="absolute inset-0">
           <img
             src="/background.jpg"
@@ -11,8 +10,6 @@ export default function Home() {
             className="w-full h-full object-cover"
           />
         </div>
-
-        {/* Navbar */}
         <nav className="absolute top-6 left-0 w-full flex items-center justify-between px-8">
           <div className="font-bold text-lg text-white">VISTANESIA</div>
           <div className="bg-gray-300/50 px-10 py-2 rounded-full flex gap-12 justify-center items-center mx-auto border border-white">
@@ -33,8 +30,6 @@ export default function Home() {
             Login
           </button>
         </nav>
-
-        {/* Main Content */}
         <div className="relative h-full flex flex-col justify-center items-center text-center text-white px-4">
           <h1 className="text-4xl md:text-6xl mt-20 font-extrabold leading-tight">
             Extraordinary Natural <br /> and Cultural Charm
@@ -42,8 +37,6 @@ export default function Home() {
           <p className="mt-4 text-lg text-white">
             Exploring Indonesia is an unforgettable adventure
           </p>
-
-          {/* Info Cards */}
           <div className="mt-10 flex justify-center gap-10 flex-wrap">
             {[ 
               { value: "5.0", label: "Average Rating" }, 
@@ -63,7 +56,7 @@ export default function Home() {
       </div>
 
       {/* Page 2 */}
-      <div className="relative pt-20 pb-10 bg-white snap-start flex flex-col items-center">
+      <div className="relative pt-20 pb-10 bg-gray-100 snap-start flex flex-col items-center">
         <div className="w-full px-6 md:px-40 mb-10">
           <div className="text-gray-600 mb-2">
             Best Location
@@ -122,80 +115,84 @@ export default function Home() {
           ))}
         </div>
       </div>
+      
       {/* Page 3 */}
-        <div className="relative pt-20 pb-10 bg-white snap-start flex flex-col md:flex-row items-center px-6 md:px-20 gap-10">
-          {/* Gambar di sebelah kiri */}
-          <div className="relative w-full md:w-1/2 max-h-screen">
-            <img
-              src="/image.jpg"
-              alt="Exploration"
-              className="rounded-xl shadow-lg object-cover max-w-[80vh] max-h-[80vh]"
-            />
-            {/* Overlay konten di bawah gambar */}
-            <div className="absolute bottom-6 left-6 bg-white/80 backdrop-blur-md p-4 rounded-lg shadow-md flex gap-4 items-center">
-              <select className="bg-transparent text-gray-700 text-sm border-none focus:ring-0">
+      <div className="relative pt-20 pb-14 bg-gray-100 snap-start flex flex-col md:flex-row items-center px-12 md:px-28">
+        <div className="relative w-full md:w-[45%] lg:w-[38%] mx-auto">
+          <img
+            src="/image.jpg"
+            alt="Exploration"
+            className="rounded-xl shadow-lg object-cover w-full h-[80vh]"
+          />
+          <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-[90%] bg-gray-500/60 py-2 px-5 rounded-full mx-auto border border-white">
+            <div className="flex gap-3 items-center">
+              <select className="bg-transparent text-white text-xs border border-gray-300 rounded-md py-0.5 px-1.5 focus:ring-2 focus:ring-gray-500 w-full">
                 <option>Date</option>
               </select>
-              <select className="bg-transparent text-gray-700 text-sm border-none focus:ring-0">
+              <select className="bg-transparent text-white text-xs border border-gray-300 rounded-md py-0.5 px-1.5 focus:ring-2 focus:ring-gray-500 w-full">
                 <option>Budget</option>
               </select>
-              <select className="bg-transparent text-gray-700 text-sm border-none focus:ring-0">
+              <select className="bg-transparent text-white text-xs border border-gray-300 rounded-md py-0.5 px-1.5 focus:ring-2 focus:ring-gray-500 w-full">
                 <option>Guest</option>
               </select>
-              <button className="bg-black text-white text-sm px-4 py-2 rounded-lg shadow-md hover:bg-gray-800">
+              <button className="bg-black text-white text-xs px-4 py-1.5 rounded-md shadow-md hover:bg-gray-800">
                 Search
               </button>
             </div>
-            {/* Caption di bawah gambar */}
-            <p className="mt-4 text-sm text-gray-600">
-              Embark on a journey to find your dream destination, where adventure and relaxation await, creating unforgettable memories along the way.
-            </p>
           </div>
-
-          {/* Konten di sebelah kanan */}
-          <div className="w-full md:w-1/2">
-            <h3 className="text-gray-400 text-sm font-medium mb-2">How it works</h3>
-            <h2 className="text-3xl font-bold text-gray-800 mb-8">One click for you</h2>
-            <div className="space-y-6">
-              {[
-                {
-                  title: "Find your destination",
-                  description:
-                    "Embark on a journey to discover your dream destination, where adventure and relaxation await.",
-                  icon: "🔍",
-                },
-                {
-                  title: "Book a ticket",
-                  description:
-                    "Ensure a smooth travel experience by booking tickets to your preferred destination via our booking platform.",
-                  icon: "✈️",
-                },
-                {
-                  title: "Make payment",
-                  description:
-                    "We offer a variety of payment options to meet your preferences and ensure a hassle-free transaction process.",
-                  icon: "💳",
-                },
-                {
-                  title: "Explore destination",
-                  description:
-                    "You'll be immersed in a captivating tapestry of sights, sounds and tastes, as you wind your way through the ancient streets.",
-                  icon: "🗺️",
-                },
-              ].map((item, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  {/* Icon */}
-                  <div className="text-xl">{item.icon}</div>
-                  {/* Text */}
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-800">{item.title}</h4>
-                    <p className="text-gray-600 text-sm">{item.description}</p>
-                  </div>
+          <p className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-[90%] text-xs text-gray-100 px-1 py-3 text-justify">
+            Embark on a journey to find your dream destination, where adventure and
+            relaxation await, creating unforgettable memories along the way.
+          </p>
+        </div>
+        <div className="w-full md:w-1/2 px-5">
+          <h3 className="text-gray-600 mb-2">How it works</h3>
+          <h2 className="text-3xl font-bold text-gray-800 mb-8">One click for you</h2>
+          <div className="space-y-6">
+            {[
+              {
+                title: "Find your destination",
+                description:
+                  "Embark on a journey to discover your dream destination, where adventure and relaxation await.",
+                icon: "/location.png",
+              },
+              {
+                title: "Book a ticket",
+                description:
+                  "Ensure a smooth travel experience by booking tickets to your preferred destination via our booking platform.",
+                icon: "/money.png",
+              },
+              {
+                title: "Explore destination",
+                description:
+                  "You'll be immersed in a captivating tapestry of sights, sounds, and tastes as you wind your way through the ancient streets.",
+                icon: "/world.png",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="group flex items-center gap-7 bg-white p-4 rounded-xl shadow-xl transition-transform transform hover:scale-105 hover:shadow-2xl hover:bg-white"
+              >
+                <div className="w-14 h-14">
+                  <img
+                    src={item.icon}
+                    alt={item.title}
+                    className="w-full h-full object-contain ml-2 group-hover:rotate-12 transition-transform duration-300"
+                  />
                 </div>
-              ))}
-            </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-800 group-hover:text-black transition-colors duration-300">
+                    {item.title}
+                  </h4>
+                  <p className="text-gray-600 text-sm group-hover:text-gray-800 transition-colors duration-300">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+      </div>
     </div>
   );
 }
