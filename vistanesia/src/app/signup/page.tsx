@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './login.module.css';
+import styles from './signup.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-const Login = () => {
+const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePassword = () => {
@@ -14,8 +14,8 @@ const Login = () => {
   };
 
   const router = useRouter();
-  const handleSignUpClick = () => {
-    router.push('/signup');
+  const handleLoginClick = () => {
+    router.push('/login');
   };
 
   return (
@@ -25,9 +25,19 @@ const Login = () => {
       </div>
       <div className={styles.rightPanel}>
         <div className={styles.card}>
-          <h2 className={styles.title}>Welcome back!</h2>
-          <p className={styles.subtitle}>Please enter your details</p>
+          <h2 className={styles.title}>Create your account</h2>
+          <p className={styles.subtitle}>Join us to access all features</p>
           <form className={styles.form}>
+            <div className={styles.inputGroup}>
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                className={styles.input}
+                required
+              />
+            </div>
             <div className={styles.inputGroup}>
               <label htmlFor="email">Email</label>
               <input
@@ -44,7 +54,7 @@ const Login = () => {
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id="password"
-                  placeholder="Enter your password"
+                  placeholder="Create a password"
                   className={styles.input}
                   required
                 />
@@ -56,15 +66,15 @@ const Login = () => {
                 </span>
               </div>
             </div>
-            <button type="submit" className={styles.loginButton}>
-              Log In
+            <button type="submit" className={styles.signupButton}>
+              Sign Up
             </button>
           </form>
           <p className={styles.footerText}>
-            Don’t have an account?{' '}
+            Already have an account?{' '}
             <span>
-              <button onClick={handleSignUpClick} className={styles.signupLink}>
-                Sign Up
+              <button onClick={handleLoginClick} className={styles.loginLink}>
+                Log In
               </button>
             </span>
           </p>
@@ -74,4 +84,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
