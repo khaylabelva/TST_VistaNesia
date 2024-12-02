@@ -136,7 +136,7 @@ body {
 }
 
 .loginButton {
-  background: #87ceeb;
+  background: #1e90ff;
   color: white;
   border: none;
   padding: 14px;
@@ -148,7 +148,7 @@ body {
 }
 
 .loginButton:hover {
-  background: #1e90ff;
+  background: #87ceeb;
   box-shadow: 0 4px 10px rgba(30, 144, 255, 0.4);
 }
 

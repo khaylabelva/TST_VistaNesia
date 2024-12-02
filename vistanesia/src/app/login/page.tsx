@@ -1,7 +1,9 @@
-"use client"; // Tambahkan ini di baris pertama
+"use client";
 
 import React, { useState } from 'react';
 import styles from './login.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -41,7 +43,10 @@ const Login = () => {
                   required
                 />
                 <span className={styles.showPassword} onClick={togglePassword}>
-                  <i className={`fas ${showPassword ? 'fa-eye' : 'fa-eye-slash'}`}></i>
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEye : faEyeSlash}
+                    size="1x"
+                  />
                 </span>
               </div>
             </div>
