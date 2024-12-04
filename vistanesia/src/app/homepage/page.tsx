@@ -5,45 +5,44 @@ export default function Homepage() {
     <div className={styles.hero}>
       <div className={styles.overlay}></div>
       <div className={styles.content}>
-        <h1 className={styles.title}>Navigate Roads with Comfort</h1>
-        <p className={styles.subtitle}>Find your next destination with ease</p>
+        <h1 className={styles.title}>Discover Indonesia’s Hidden Gems</h1>
       </div>
       <div className={styles.searchContainer}>
         <form className={styles.form}>
           <div className={styles.inputGroup}>
             <label htmlFor="location" className={styles.label}>
-              Location
+              Destination
             </label>
             <input
               type="text"
               id="location"
-              placeholder="Enter location"
+              placeholder="Enter your destination"
               className={styles.input}
             />
           </div>
           <div className={styles.inputGroup}>
             <label htmlFor="category" className={styles.label}>
-              Category
+              Travel Style
             </label>
             <select id="category" className={styles.select}>
-              <option value="economy">Economy Bus</option>
-              <option value="executive">Executive Bus</option>
-              <option value="luxury">Luxury Bus</option>
+              <option value="economy">Budget-Friendly</option>
+              <option value="executive">Comfort & Style</option>
+              <option value="luxury">Luxury Escapes</option>
             </select>
           </div>
           <div className={styles.inputGroup}>
             <label htmlFor="price" className={styles.label}>
-              Price Range
+              Budget Range
             </label>
             <input
               type="text"
               id="price"
-              placeholder="Enter price range"
+              placeholder="Enter your budget range"
               className={styles.input}
             />
           </div>
           <button type="submit" className={styles.button}>
-            Search →
+            Explore →
           </button>
         </form>
       </div>

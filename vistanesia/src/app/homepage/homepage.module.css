@@ -1,16 +1,18 @@
-/* General styling for the hero section */
 .hero {
     height: 100vh;
     background: url('/homepage.jpg') no-repeat center center/cover;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.4);
     position: absolute;
     top: 0;
     left: 0;
@@ -23,42 +25,31 @@
     font-size: 3rem;
     font-weight: bold;
     color: white;
-    margin: 0;
-    text-align: center;
+    margin-bottom: 30;
     position: relative;
     z-index: 2;
 }
 
-.subtitle {
-    font-size: 1.2rem;
-    color: #ddd;
-    text-align: center;
-    margin: 10px 0 30px;
-    position: relative;
-    z-index: 2;
-}
-
-/* Styling for the search container */
 .searchContainer {
     width: 100%;
-    background: white;
-    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 50px 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     position: relative;
     z-index: 2;
 }
 
-/* Form styling */
 .form {
     display: flex;
     gap: 20px;
-    flex-wrap: wrap; /* Ensure elements wrap on smaller screens */
+    flex-wrap: wrap;
     align-items: center;
 }
 
-/* Input group styling */
 .inputGroup {
     flex: 1;
     display: flex;
@@ -66,13 +57,11 @@
     gap: 8px;
 }
 
-/* Label styling */
 .label {
     font-size: 0.9rem;
-    color: #555;
+    color: black;
 }
 
-/* Input and select field styling */
 .input,
 .select {
     padding: 12px 15px;
@@ -80,7 +69,7 @@
     border-radius: 5px;
     font-size: 1rem;
     box-sizing: border-box;
-    width: 100%; /* Make input and select take full width */
+    width: 100%;
 }
 
 .button {
