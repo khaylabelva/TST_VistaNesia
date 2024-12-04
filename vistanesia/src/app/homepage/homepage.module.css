@@ -1,0 +1,121 @@
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: url('/homepage.jpg') no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Letakkan elemen di bawah */
+    align-items: center;
+    position: relative;
+  }
+  
+  /* Overlay (gelap transparan) */
+  .overlay {
+    background: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+  
+  /* Title and Subtitle */
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    color: #ddd;
+    text-align: center;
+    margin: 10px 0 30px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Container Putih (Full Width) */
+  .searchContainer {
+    width: 100%; /* Full lebar layar */
+    background: white;
+    padding: 30px 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Form */
+  .form {
+    display: flex;
+    justify-content: space-between; /* Rata kiri-kanan */
+    align-items: center; /* Pastikan semua elemen di tengah secara vertikal */
+    gap: 20px; /* Jarak antar input */
+  }
+  
+  /* Input Group */
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Sesuaikan lebar */
+  }
+  
+  .label {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  
+  /* Input dan Select */
+  .input,
+  .select {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    height: 48px; /* Samakan tinggi input dengan tombol */
+    box-sizing: border-box; /* Pastikan padding tidak memengaruhi ukuran */
+  }
+  
+  /* Tombol */
+  .button {
+    padding: 0 20px; /* Padding horizontal */
+    background: black;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: 48px; /* Tinggi sama dengan input */
+    display: flex;
+    align-items: center; /* Teks tombol sejajar secara vertikal */
+    justify-content: center; /* Teks tombol sejajar secara horizontal */
+    box-sizing: border-box; /* Pastikan padding tidak memengaruhi ukuran */
+  }
+  
+  .button:hover {
+    background: #444;
+  }
+  
+  /* Responsif */
+  @media (max-width: 768px) {
+    .form {
+      flex-direction: column; /* Kolom saat layar kecil */
+      gap: 15px;
+    }
+  
+    .input,
+    .select,
+    .button {
+      width: 100%; /* Lebar penuh */
+    }
+  }
+  

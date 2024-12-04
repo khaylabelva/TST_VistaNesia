@@ -24,11 +24,11 @@ export default function Home() {
             <a href="#about" className="text-white text-sm font-medium hover:text-gray-900 transition-all duration-300 ease-in-out">
               About
             </a>
-            <a href="#services" className="text-white text-sm font-medium hover:text-gray-900 transition-all duration-300 ease-in-out">
-              Services
-            </a>
             <a href="#tour" className="text-white text-sm font-medium hover:text-gray-900 transition-all duration-300 ease-in-out">
               Tour
+            </a>
+            <a href="#services" className="text-white text-sm font-medium hover:text-gray-900 transition-all duration-300 ease-in-out">
+              Services
             </a>
             <a href="#contact" className="text-white text-sm font-medium hover:text-gray-900 transition-all duration-300 ease-in-out">
               Contact
@@ -164,21 +164,21 @@ export default function Home() {
           <div className="space-y-6">
             {[
               {
-                title: "Find your destination",
+                title: "Define Your Journey",
                 description:
-                  "Embark on a journey to discover your dream destination, where adventure and relaxation await.",
+                  "Find your perfect trip by entering location, budget, and preferred travel type.",
                 icon: "/location.png",
               },
               {
-                title: "Book a ticket",
+                title: "Plan Within Your Budget",
                 description:
-                  "Ensure a smooth travel experience by booking tickets to your preferred destination via our booking platform.",
+                  "Explore destinations that align with your budget for a seamless adventure.",
                 icon: "/money.png",
               },
               {
-                title: "Explore destination",
+                title: "Discover Tailored Adventures",
                 description:
-                  "You'll be immersed in a captivating tapestry of sights, sounds, and tastes as you wind your way through the ancient streets.",
+                  "Choose your ideal travel category and unlock unforgettable experiences.",
                 icon: "/world.png",
               },
             ].map((item, index) => (
