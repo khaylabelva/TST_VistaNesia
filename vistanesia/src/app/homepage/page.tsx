@@ -25,9 +25,9 @@ export default function Homepage() {
               Travel Style
             </label>
             <select id="category" className={styles.select}>
-              <option value="economy">Budget-Friendly</option>
-              <option value="executive">Comfort & Style</option>
-              <option value="luxury">Luxury Escapes</option>
+              <option value="budaya">Budaya</option>
+              <option value="taman-hiburan">Taman Hiburan</option>
+              <option value="cagar-alam">Cagar Alam</option>
             </select>
           </div>
           <div className={styles.inputGroup}>
