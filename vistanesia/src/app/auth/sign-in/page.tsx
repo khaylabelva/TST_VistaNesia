@@ -41,7 +41,7 @@ const SignInForm = () => {
   }
 
   const handleSignUpClick = () => {
-    router.push('/signup');
+    router.push('/auth/sign-up');
   };
 
   return (
