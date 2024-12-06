@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+  }
+  
+  .container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background-color: #ffffff;
+  }
+  
+  .leftPanel {
+    flex: 1.7;
+    position: relative;
+    background-color: #ffffff;
+    overflow: hidden;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+  
+  .leftPanel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    z-index: 1;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+  
+  .imageBackground {
+    position: relative;
+    z-index: 2;
+    background-image: url('/login.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .rightPanel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 8px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 25px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .inputGroup label {
+    font-size: 14px;
+    color: #4a4a4a;
+    margin-bottom: 6px;
+  }
+  
+  .input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .input:focus {
+    border-color: #003366;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 51, 102, 0.5);
+  }
+  
+  .passwordWrapper {
+    position: relative;
+  }
+  
+  .passwordWrapper .input {
+    padding-right: 40px;
+  }
+  
+  .showPassword {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #c1c1c1;
+    transition: color 0.3s ease;
+  }
+  
+  .showPassword:hover {
+    color: #003366;
+  }
+  
+  .loginButton {
+    background: #003366;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .loginButton:hover {
+    background: #87ceeb;
+    box-shadow: 0 4px 10px rgba(30, 144, 255, 0.4);
+  }
+  
+  .footerText {
+    font-size: 14px;
+    color: #8a8a8a;
+    margin-top: 20px;
+  }
+  
+  .signupLink {
+    color: #003366;
+    text-decoration: none;
+  }
+  
+  .signupLink:hover {
+    text-decoration: underline;
+  }
