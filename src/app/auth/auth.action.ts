@@ -10,7 +10,6 @@ import { signInSchema } from "./sign-in/page"
 // import { generateCodeVerifier, generateState } from "arctic"
 // import { googleOAuthClient } from "@/lib/googleOauth"
 
-
 export const signUp = async (values: z.infer<typeof signUpSchema>) => {
   try {
     const existingUser = await prisma.user.findUnique({
@@ -31,30 +30,40 @@ export const signUp = async (values: z.infer<typeof signUpSchema>) => {
     });
 
     return { success: true };
-  } catch (error) {
+  } catch {
     return { error: 'Something went wrong', success: false };
   }
 };
 
-
 export const signIn = async (values: z.infer<typeof signInSchema>) => {
+  try {
     const user = await prisma.user.findUnique({
-        where: {
-            email: values.email
-        }
-    })
+      where: {
+        email: values.email,
+      },
+    });
     if (!user || !user.hashedPassword) {
-        return { success: false, error: "Invalid Credentials!" }
+      return { success: false, error: "Invalid Credentials!" };
     }
-    const passwordMatch = await new Argon2id().verify(user.hashedPassword, values.password)
+    const passwordMatch = await new Argon2id().verify(
+      user.hashedPassword,
+      values.password
+    );
     if (!passwordMatch) {
-        return { success: false, error: "Invalid Credentials!" }
+      return { success: false, error: "Invalid Credentials!" };
     }
-    const session = await lucia.createSession(user.id, {})
-    const sessionCookie = await lucia.createSessionCookie(session.id)
-    ;(await cookies()).set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
-    return { success: true }
-}
+    const session = await lucia.createSession(user.id, {});
+    const sessionCookie = await lucia.createSessionCookie(session.id);
+    (await cookies()).set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes
+    );
+    return { success: true };
+  } catch {
+    return { success: false, error: "Something went wrong" };
+  }
+};
 
 // export const logOut = async () => {
 //     const sessionCookie = await lucia.createBlankSessionCookie()
@@ -81,7 +90,8 @@ export const signIn = async (values: z.infer<typeof signInSchema>) => {
 //         })
 //         return { success: true, url: authUrl.toString() }
 
-//     } catch (error) {
+//     } catch {
+//         // Removed unused `error` variable
 //         return { success: false, error: 'Something went wrong' }
 //     }
 // }
