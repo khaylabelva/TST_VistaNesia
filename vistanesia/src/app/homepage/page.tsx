@@ -1,10 +1,18 @@
+import { getUser } from '@/lib/lucia';
 import styles from './homepage.module.css';
+import { redirect } from 'next/navigation';
 
-export default function Homepage() {
+export default async function Homepage() {
+  const user = await getUser()
+  if (!user) {
+    redirect('/auth/sign-in')
+  }
+
   return (
     <div className={styles.hero}>
       <div className={styles.overlay}></div>
       <div className={styles.content}>
+        <p className={styles.greeting}>Hello, {user.name}!</p>
         <h1 className={styles.title}>Discover Indonesia’s Hidden Gems</h1>
       </div>
       <div className={styles.searchContainer}>
