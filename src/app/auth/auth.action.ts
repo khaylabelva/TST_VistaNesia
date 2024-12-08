@@ -7,7 +7,6 @@ import { Argon2id } from 'oslo/password'
 import { lucia } from "@/lib/lucia"
 import { cookies } from "next/headers"
 import { signInSchema } from "./sign-in/page"
-import { redirect } from "next/navigation"
 // import { generateCodeVerifier, generateState } from "arctic"
 // import { googleOAuthClient } from "@/lib/googleOauth"
 

@@ -32,9 +32,8 @@ export const getUser = async () => {
             const sessionCookie = await lucia.createBlankSessionCookie()
             ;(await cookies()).set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
         }
-
     } catch (error) {
-
+        return { error: 'Something went wrong', success: false };
     }
     const dbUser = await prisma.user.findUnique({
         where: {
