@@ -33,7 +33,7 @@ export const getUser = async () => {
             ;(await cookies()).set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
         }
     } catch {
-        return { error: 'Something went wrong', success: false };
+        return null
     }    
     const dbUser = await prisma.user.findUnique({
         where: {
