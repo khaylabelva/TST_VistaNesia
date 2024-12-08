@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signUpSchema } from './schema';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -10,12 +11,6 @@ import styles from './signup.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { signUp } from '../auth.action';
-
-export const signUpSchema = z.object({
-  name: z.string().min(5, { message: 'Name must be at least 5 characters long' }),
-  email: z.string().email({ message: 'Invalid email address' }),
-  password: z.string().min(8, { message: 'Password must be at least 8 characters long' }),
-});
 
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);

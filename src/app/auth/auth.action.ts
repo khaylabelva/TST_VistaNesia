@@ -1,12 +1,12 @@
 'use server'
 
 import { z } from "zod"
-import { signUpSchema } from "./sign-up/page"
+import { signUpSchema } from "./sign-up/schema"
 import { prisma } from "@/lib/prisma"
 import { Argon2id } from 'oslo/password'
 import { lucia } from "@/lib/lucia"
 import { cookies } from "next/headers"
-import { signInSchema } from "./sign-in/page"
+import { signInSchema } from "./sign-in/schema"
 // import { generateCodeVerifier, generateState } from "arctic"
 // import { googleOAuthClient } from "@/lib/googleOauth"
 

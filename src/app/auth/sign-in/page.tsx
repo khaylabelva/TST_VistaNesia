@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signInSchema } from './schema';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -10,11 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { signIn } from '../auth.action';
 import styles from './login.module.css';
-
-export const signInSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-});
 
 const SignInForm = () => {
   const [showPassword, setShowPassword] = useState(false);
