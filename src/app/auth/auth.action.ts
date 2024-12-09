@@ -7,8 +7,6 @@ import { Argon2id } from 'oslo/password'
 import { lucia } from "@/lib/lucia"
 import { cookies } from "next/headers"
 import { signInSchema } from "./sign-in/schema"
-// import { generateCodeVerifier, generateState } from "arctic"
-// import { googleOAuthClient } from "@/lib/googleOauth"
 
 export const signUp = async (values: z.infer<typeof signUpSchema>) => {
   try {
@@ -64,34 +62,3 @@ export const signIn = async (values: z.infer<typeof signInSchema>) => {
     return { success: false, error: "Something went wrong" };
   }
 };
-
-// export const logOut = async () => {
-//     const sessionCookie = await lucia.createBlankSessionCookie()
-//     ;(await cookies()).set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
-//     return redirect('/authenticate')
-// }
-
-// export const getGoogleOauthConsentUrl = async () => {
-//     try {
-//         const state = generateState()
-//         const codeVerifier = generateCodeVerifier()
-
-//         cookies().set('codeVerifier', codeVerifier, {
-//             httpOnly: true,
-//             secure: process.env.NODE_ENV === 'production'
-//         })
-//         cookies().set('state', state, {
-//             httpOnly: true,
-//             secure: process.env.NODE_ENV === 'production'
-//         })
-
-//         const authUrl = await googleOAuthClient.createAuthorizationURL(state, codeVerifier, {
-//             scopes: ['email', 'profile']
-//         })
-//         return { success: true, url: authUrl.toString() }
-
-//     } catch {
-//         // Removed unused `error` variable
-//         return { success: false, error: 'Something went wrong' }
-//     }
-// }
