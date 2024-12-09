@@ -48,7 +48,7 @@ const SignUpForm = () => {
         <div className={styles.card}>
           <h2 className={styles.title}>Create your account</h2>
           <p className={styles.subtitle}>Join us to access all features</p>
-          <form className={styles.form} onSubmit={form.handleSubmit(onSubmit)}>
+          <form className={styles.form} onSubmit={form.handleSubmit(onSubmit)} autoComplete="on">
             <div className={styles.inputGroup}>
               <label htmlFor="name">Name</label>
               <input
@@ -57,6 +57,7 @@ const SignUpForm = () => {
                 placeholder="Enter your name"
                 {...form.register('name')}
                 className={styles.input}
+                autoComplete="name" 
               />
             </div>
             <div className={styles.inputGroup}>
@@ -67,6 +68,7 @@ const SignUpForm = () => {
                 placeholder="Enter your email"
                 {...form.register('email')}
                 className={styles.input}
+                autoComplete="email"
               />
             </div>
             <div className={styles.inputGroup}>
@@ -78,6 +80,7 @@ const SignUpForm = () => {
                   placeholder="Create a password"
                   {...form.register('password')}
                   className={styles.input}
+                  autoComplete="new-password" 
                 />
                 <span className={styles.showPassword} onClick={togglePassword}>
                   <FontAwesomeIcon
