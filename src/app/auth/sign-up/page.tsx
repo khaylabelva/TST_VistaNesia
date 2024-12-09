@@ -3,14 +3,25 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signUpSchema } from './schema';
+import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { z } from 'zod';
-import styles from './signup.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
+import styles from './signup.module.css';
+import { signUpSchema } from './schema';
 import { signUp } from '../auth.action';
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -48,49 +59,82 @@ const SignUpForm = () => {
         <div className={styles.card}>
           <h2 className={styles.title}>Create your account</h2>
           <p className={styles.subtitle}>Join us to access all features</p>
-          <form className={styles.form} onSubmit={form.handleSubmit(onSubmit)}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                placeholder="Enter your name"
-                {...form.register('name')}
-                className={styles.input}
+          <Form {...form}>
+            <form
+              className={styles.form}
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
+              {/* Name Field */}
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="Enter your name"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                {...form.register('email')}
-                className={styles.input}
+              {/* Email Field */}
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="Enter your email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="password">Password</label>
-              <div className={styles.passwordWrapper}>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
-                  placeholder="Create a password"
-                  {...form.register('password')}
-                  className={styles.input}
-                />
-                <span className={styles.showPassword} onClick={togglePassword}>
-                  <FontAwesomeIcon
-                    icon={showPassword ? faEye : faEyeSlash}
-                    size="1x"
-                  />
-                </span>
-              </div>
-            </div>
-            <button type="submit" className={styles.signupButton}>
-              Sign Up
-            </button>
-          </form>
+              {/* Password Field */}
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <div className={styles.passwordWrapper}>
+                        <Input
+                          type={showPassword ? 'text' : 'password'}
+                          placeholder="Create a password"
+                          {...field}
+                        />
+                        <span
+                          className={styles.showPassword}
+                          onClick={togglePassword}
+                        >
+                          <FontAwesomeIcon
+                            icon={showPassword ? faEye : faEyeSlash}
+                            size="1x"
+                          />
+                        </span>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* Submit Button */}
+              <Button type="submit" className={styles.signupButton}>
+                Sign Up
+              </Button>
+            </form>
+          </Form>
           <p className={styles.footerText}>
             Already have an account?{' '}
             <button

@@ -3,14 +3,25 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signInSchema } from './schema';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import { signIn } from '../auth.action';
 import styles from './login.module.css';
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { signInSchema } from './schema';
 
 const SignInForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -49,45 +60,64 @@ const SignInForm = () => {
         <div className={styles.card}>
           <h2 className={styles.title}>Welcome back!</h2>
           <p className={styles.subtitle}>Please enter your details</p>
-          <form
-            className={styles.form}
-            onSubmit={form.handleSubmit(onSubmit)}
-          >
-            <div className={styles.inputGroup}>
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                {...form.register('email')}
-                className={styles.input}
+          <Form {...form}>
+            <form
+              className={styles.form}
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
+              {/* Email Field */}
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="Enter your email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="password">Password</label>
-              <div className={styles.passwordWrapper}>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
-                  placeholder="Enter your password"
-                  {...form.register('password')}
-                  className={styles.input}
-                />
-                <span
-                  className={styles.showPassword}
-                  onClick={togglePassword}
-                >
-                  <FontAwesomeIcon
-                    icon={showPassword ? faEye : faEyeSlash}
-                    size="1x"
-                  />
-                </span>
-              </div>
-            </div>
-            <button type="submit" className={styles.loginButton}>
-              Log In
-            </button>
-          </form>
+              {/* Password Field */}
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-left">Password</FormLabel>
+                    <FormControl>
+                      <div className={styles.passwordWrapper}>
+                        <Input
+                          type={showPassword ? 'text' : 'password'}
+                          placeholder="Enter your password"
+                          {...field}
+                        />
+                        <span
+                          className={styles.showPassword}
+                          onClick={togglePassword}
+                        >
+                          <FontAwesomeIcon
+                            icon={showPassword ? faEye : faEyeSlash}
+                            size="1x"
+                          />
+                        </span>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* Submit Button */}
+              <Button type="submit" className={styles.loginButton}>
+                Log In
+              </Button>
+            </form>
+          </Form>
           <p className={styles.footerText}>
             Don’t have an account?{' '}
             <button onClick={handleSignUpClick} className={styles.signupLink}>
