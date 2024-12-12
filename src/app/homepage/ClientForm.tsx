@@ -15,10 +15,6 @@ const ClientForm = ({ user }: { user: any }) => {
   });
   const router = useRouter();
 
-  const handleHistoryClick = () => {
-    router.push('/history');
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -35,7 +31,7 @@ const ClientForm = ({ user }: { user: any }) => {
     if (hasErrors) {
       return;
     }
-    router.push(`/recommendation?location=${encodeURIComponent(location)}&category=${encodeURIComponent(category)}&price=${encodeURIComponent(price)}`);
+    router.push('/recommendation');
   };
 
   return (
