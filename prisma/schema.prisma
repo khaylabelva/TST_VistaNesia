@@ -28,3 +28,21 @@ model Session {
 
   user User @relation(fields: [userId], references: [id])
 }
+
+model Place {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  category    String
+  city        String
+  price       Int
+  rating      Float
+  timeMinutes Float?
+  coordinate  String
+  latitude    Float
+  longitude   Float
+  blank       String?
+  index       Int
+
+  @@map("places")
+}
