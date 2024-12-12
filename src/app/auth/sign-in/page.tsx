@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
 import { signIn } from '../auth.action';
 import styles from './login.module.css';
 import {

@@ -4,9 +4,10 @@ import { z } from "zod"
 import { signUpSchema } from "./sign-up/schema"
 import { prisma } from "@/lib/prisma"
 import { Argon2id } from 'oslo/password'
-import { lucia } from "@/lib/lucia"
+import { lucia, getUser } from "@/lib/lucia"
 import { cookies } from "next/headers"
 import { signInSchema } from "./sign-in/schema"
+import { redirect } from "next/navigation"
 
 export const signUp = async (values: z.infer<typeof signUpSchema>) => {
   try {
@@ -61,4 +62,22 @@ export const signIn = async (values: z.infer<typeof signInSchema>) => {
   } catch {
     return { success: false, error: "Something went wrong" };
   }
+};
+
+export const fetchUser = async () => {
+  const user = await getUser();
+  return user;
+};
+
+export const logOut = async () => {
+  const currentSessionId = (await cookies()).get('lucia_session')?.value;
+
+  if (currentSessionId) {
+      await lucia.invalidateSession(currentSessionId);
+  }
+
+  const sessionCookie = await lucia.createBlankSessionCookie();
+  (await cookies()).set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+
+  return redirect('/');
 };
