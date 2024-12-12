@@ -33,24 +33,24 @@
     top: 20px;
     right: 43px;
     z-index: 1000;
-  }
-  
-  .logoutButton {
+}
+
+.logoutButton {
     background-color: black;
     color: white;
     border: none;
     border-radius: 30px;
-    padding: 5px 20px;
+    padding: 9px 23px;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
   
-  .logoutButton:hover {
+.logoutButton:hover {
     color: black;
     background-color: white;
     border-color: white;
-  }
+}
 
 .greeting {
     font-size: 1.5rem;
