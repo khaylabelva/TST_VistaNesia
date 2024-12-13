@@ -1,4 +1,13 @@
-c
+.container {
+  padding: 60px 60px;
+  color: #ffffff;
+  background: url('/recommendation.jpg') no-repeat center center/cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
   margin-bottom: 40px;
 }
