@@ -36,8 +36,8 @@
 }
 
 .logoutButton {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     border: none;
     border-radius: 30px;
     padding: 9px 23px;
@@ -47,9 +47,9 @@
 }
   
 .logoutButton:hover {
-    color: black;
-    background-color: white;
-    border-color: white;
+    color: white;
+    background-color: black;
+    border-color: black;
 }
 
 .greeting {
