@@ -52,16 +52,8 @@
 
 .recommendations {
   position: relative;
-  padding: 0 70px;
+  padding: 0 81px;
   margin-top: 10px;
-}
-
-.carousel {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 30px;
-  width: 100%;
-  overflow: hidden;
 }
 
 .card {
@@ -161,10 +153,15 @@
   color: white;
   border: none;
   border-radius: 50%;
-  font-size: 1.5rem;
+  font-size: 2rem;
   padding: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .prevButton:hover, .nextButton:hover {
@@ -177,4 +174,13 @@
 
 .nextButton {
   right: 20px;
+}
+
+.carousel {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 30px;
+  width: 100%;
+  overflow: hidden;
+  transition: transform 0.5s ease-in-out;
 }

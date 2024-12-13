@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from './recommendations.module.css';
 
 interface Destination {
@@ -77,28 +77,119 @@ const recommendedDestinations: Destination[] = [
       time: '180 minutes',
     },
   },
+  {
+    id: 6,
+    name: 'Pulau Komodo',
+    description: 'Home to the famous Komodo dragons and breathtaking landscapes.',
+    city: 'Nusa Tenggara Timur',
+    details: {
+      category: 'Cagar Alam',
+      price: 'Rp 2.500.000 - Rp 5.000.000',
+      rating: '4.8',
+      time: '180 minutes',
+    },
+  },
+  {
+    id: 7,
+    name: 'Raja Ampat',
+    description: 'A paradise for marine life and underwater exploration.',
+    city: 'Papua Barat',
+    details: {
+      category: 'Cagar Alam',
+      price: 'Rp 5.000.000 - Rp 10.000.000',
+      rating: '5.0',
+      time: '240 minutes',
+    },
+  },
+  {
+    id: 8,
+    name: 'Candi Borobudur',
+    description: "The world's largest Buddhist temple with stunning architectural marvel.",
+    city: 'Magelang, Jawa Tengah',
+    details: {
+      category: 'Budaya',
+      price: 'Rp 1.500.000 - Rp 3.000.000',
+      rating: '4.7',
+      time: '120 minutes',
+    },
+  },
+  {
+    id: 9,
+    name: 'Taman Safari Indonesia',
+    description: 'An exciting wildlife park with diverse animal species.',
+    city: 'Bogor, Jawa Barat',
+    details: {
+      category: 'Taman Hiburan',
+      price: 'Rp 1.000.000 - Rp 2.500.000',
+      rating: '4.5',
+      time: '150 minutes',
+    },
+  },
+  {
+    id: 10,
+    name: 'Cagar Alam Kerinci Seblat',
+    description: 'A vast national park with rich biodiversity and stunning landscapes.',
+    city: 'Sumatera',
+    details: {
+      category: 'Cagar Alam',
+      price: 'Rp 2.000.000 - Rp 4.000.000',
+      rating: '4.6',
+      time: '180 minutes',
+    },
+  },
 ];
 
 export default function AdventurePage() {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const carouselRef = useRef<HTMLDivElement>(null);
+    const [isAtStart, setIsAtStart] = useState(true);
+    const [isAtEnd, setIsAtEnd] = useState(false);
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        const carousel = carouselRef.current;
+        if (!carousel) return;
+  
+        const scrollLeft = Math.ceil(carousel.scrollLeft);
+        const scrollWidth = carousel.scrollWidth - carousel.clientWidth;
+        setIsAtStart(scrollLeft <= 0);
+        setIsAtEnd(scrollLeft >= scrollWidth - 5);
+      };
+  
+      const carousel = carouselRef.current;
+      if (carousel) {
+        carousel.addEventListener('scroll', handleScroll);
+        handleScroll();
+      }
+  
+      return () => {
+        if (carousel) carousel.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
+  
+    const scrollLeft = () => {
+      const carousel = carouselRef.current;
+      if (carousel) {
+        const scrollAmount = carousel.clientWidth / 2;
+        carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      }
+    };
+  
+    const scrollRight = () => {
+      const carousel = carouselRef.current;
+      if (carousel) {
+        const scrollAmount = carousel.clientWidth / 2;
+        carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    };
+
     const [expandedCard, setExpandedCard] = useState<Destination | null>(null);
-  
-    const handleNext = () => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % recommendedDestinations.length);
-    };
-  
-    const handlePrev = () => {
-      setCurrentIndex(
-        (prevIndex) => (prevIndex - 1 + recommendedDestinations.length) % recommendedDestinations.length
-      );
-    };
-  
+
     const handleViewDescription = (destination: Destination) => {
-      setExpandedCard(destination);
+        setExpandedCard(destination);
     };
-  
+
     const handleCloseModal = () => {
-      setExpandedCard(null);
+        setExpandedCard(null);
     };
 
   return (
@@ -122,50 +213,51 @@ export default function AdventurePage() {
 
       {/* Recommendations Section */}
       <section className={styles.recommendations}>
-        <button className={styles.prevButton} onClick={handlePrev}>
-          ◀ Prev
-        </button>
-        <div className={styles.carousel}>
-          {recommendedDestinations.slice(currentIndex, currentIndex + 3).map((destination) => (
-            <div key={destination.id} className={styles.card}>
-              <div className={styles.cardContent}>
-                <h3 className={styles.cardTitle}>{destination.name}</h3>
-                <p className={styles.city}>{destination.city}</p>
-                <div className={styles.details}>
-                  <p>
-                    <strong>Category:</strong> {destination.details.category}
-                  </p>
-                  <p>
-                    <strong>Price:</strong> {destination.details.price}
-                  </p>
-                  <p>
-                    <strong>Rating:</strong> {destination.details.rating}
-                  </p>
-                  <p>
-                    <strong>Estimated Time:</strong> {destination.details.time}
-                  </p>
+        {!isAtStart && (
+            <button className={styles.prevButton} onClick={scrollLeft}>
+            ◀
+            </button>
+        )}
+        <div className={styles.carouselWrapper}>
+            <div className={styles.carousel} ref={carouselRef}>
+            {recommendedDestinations.map((destination) => (
+                <div key={destination.id} className={styles.card}>
+                <div className={styles.cardContent}>
+                    <h3 className={styles.cardTitle}>{destination.name}</h3>
+                    <p className={styles.city}>{destination.city}</p>
+                    <div className={styles.details}>
+                    <p><strong>Category:</strong> {destination.details.category}</p>
+                    <p><strong>Price:</strong> {destination.details.price}</p>
+                    <p><strong>Rating:</strong> {destination.details.rating}</p>
+                    <p><strong>Estimated Time:</strong> {destination.details.time}</p>
+                    </div>
+                    <button
+                    className={styles.viewDescriptionButton}
+                    onClick={() => handleViewDescription(destination)}
+                    >
+                    View Description
+                    </button>
                 </div>
-                <button
-                  className={styles.viewDescriptionButton}
-                  onClick={() => handleViewDescription(destination)}
-                >
-                  View Description
-                </button>
-              </div>
+                </div>
+            ))}
             </div>
-          ))}
         </div>
-        <button className={styles.nextButton} onClick={handleNext}>
-          Next ▶
-        </button>
-      </section>
+        {!isAtEnd && (
+            <button className={styles.nextButton} onClick={scrollRight}>
+            ▶
+            </button>
+        )}
+        </section>
 
       {expandedCard && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <h2>{expandedCard.name}</h2>
             <p>{expandedCard.description}</p>
-            <button className={styles.closeButton} onClick={handleCloseModal}>
+            <button
+              className={styles.closeButton}
+              onClick={handleCloseModal}
+            >
               ✖ Close
             </button>
           </div>
