@@ -31,7 +31,7 @@ const ClientForm = ({ user }: { user: any }) => {
     if (hasErrors) {
       return;
     }
-    router.push('/recommendation');
+    router.push('/recommendations');
   };
 
   return (

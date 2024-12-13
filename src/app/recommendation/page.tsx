@@ -88,6 +88,9 @@ export default function RecommendationPage() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Recommended Destinations</h1>
+      <p className={styles.subText}>
+        Embark on your dream journey by choosing destinations that delight not only your eyes but also your soul. Each place holds stories and adventures waiting to be explored.
+      </p>
       <div className={styles.timeline}>
         {recommendedDestinations.map((destination, index) => (
           <div
