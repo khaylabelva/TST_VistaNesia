@@ -149,7 +149,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(255, 255, 255);
   color: white;
   border: none;
   border-radius: 50%;
@@ -157,15 +157,15 @@
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .prevButton:hover, .nextButton:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(189, 184, 184, 0.8);
 }
 
 .prevButton {
@@ -183,4 +183,9 @@
   width: 100%;
   overflow: hidden;
   transition: transform 0.5s ease-in-out;
+}
+
+.arrowImage {
+  width: 24px;
+  height: 24px;
 }

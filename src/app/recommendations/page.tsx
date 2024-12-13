@@ -215,7 +215,7 @@ export default function AdventurePage() {
       <section className={styles.recommendations}>
         {!isAtStart && (
             <button className={styles.prevButton} onClick={scrollLeft}>
-            ◀
+                <img src="/left-arrow.png" alt="Scroll Left" className={styles.arrowImage} />
             </button>
         )}
         <div className={styles.carouselWrapper}>
@@ -244,7 +244,7 @@ export default function AdventurePage() {
         </div>
         {!isAtEnd && (
             <button className={styles.nextButton} onClick={scrollRight}>
-            ▶
+                <img src="/right-arrow.png" alt="Scroll Right" className={styles.arrowImage} />
             </button>
         )}
         </section>
