@@ -216,3 +216,7 @@
 .button:hover {
     background: #444;
 }
+
+.input::placeholder {
+    color: #141414; /* Set your desired color for the placeholder */
+  }

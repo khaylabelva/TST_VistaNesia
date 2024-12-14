@@ -58,6 +58,9 @@ const ClientForm = ({
               }}
               className={`${styles.select} ${errors.location ? styles.inputError : ''}`}
             >
+              <option value="" disabled className={styles.placeholderOption}>
+                Select your destination
+              </option>
               {cities.map((city, index) => (
                 <option key={index} value={city}>
                   {city}
@@ -79,6 +82,9 @@ const ClientForm = ({
               }}
               className={`${styles.select} ${errors.category ? styles.inputError : ''}`}
             >
+              <option value="" disabled className={styles.placeholderOption}>
+                Select your travel style
+              </option>
               {categories.map((cat, index) => (
                 <option key={index} value={cat}>
                   {cat}
@@ -91,17 +97,23 @@ const ClientForm = ({
             <label htmlFor="price" className={styles.label}>
               Budget Range
             </label>
-            <input
-              type="text"
+            <select
               id="price"
               value={price}
               onChange={(e) => {
                 setPrice(e.target.value);
                 setErrors((prev) => ({ ...prev, price: '' }));
               }}
-              placeholder="Enter your budget range"
-              className={`${styles.input} ${errors.price ? styles.inputError : ''}`}
-            />
+              className={`${styles.select} ${errors.price ? styles.inputError : ''}`}
+            >
+              <option value="" disabled className={styles.placeholderOption}>
+                Select your budget range
+              </option>
+              <option value="0-50000">0 - 50,000</option>
+              <option value="50000-100000">50,000 - 100,000</option>
+              <option value="100000-150000">100,000 - 150,000</option>
+              <option value="150000+">&gt; 150,000</option>
+            </select>
             {errors.price && <p className={styles.errorMessage}>{errors.price}</p>}
           </div>
         </div>
