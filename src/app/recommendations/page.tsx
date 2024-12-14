@@ -211,6 +211,11 @@ export default function AdventurePage() {
         </div>
       </section>
 
+      {/* Title Section */}
+      <div className={styles.headerTop}>
+        <h2 className={styles.title}>There's 10 places for you to explore!</h2>
+      </div>
+
       {/* Recommendations Section */}
       <section className={styles.recommendations}>
         {!isAtStart && (

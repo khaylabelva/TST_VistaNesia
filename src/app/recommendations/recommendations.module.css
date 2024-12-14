@@ -1,5 +1,5 @@
 .container {
-  padding: 60px 60px;
+  padding: 60px 60px 0px;
   color: #ffffff;
   background: url('/recommendation.jpg') no-repeat center center/cover;
   background-attachment: fixed;
@@ -10,6 +10,7 @@
 
 .header {
   margin-bottom: 40px;
+  margin-top: -10px;
 }
 
 .headerContent {
@@ -179,13 +180,64 @@
 .carousel {
   display: flex;
   flex-wrap: nowrap;
-  gap: 30px;
   width: 100%;
   overflow: hidden;
   transition: transform 0.5s ease-in-out;
+  overflow-x: scroll;
+  gap: 1rem;
 }
 
 .arrowImage {
   width: 24px;
   height: 24px;
 }
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.title {
+  font-size: 1rem;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+  height: 0px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.carousel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
