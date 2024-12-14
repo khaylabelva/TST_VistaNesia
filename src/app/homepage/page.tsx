@@ -9,6 +9,8 @@ import { fetchUser, logOut } from '../auth/auth.action';
 export default function Homepage() {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const [cities, setCities] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -20,13 +22,30 @@ export default function Homepage() {
       }
       setLoading(false);
     };
+
+    const fetchDropdownData = async () => {
+      try {
+        const response = await fetch('/api/places');
+        const data = await response.json();
+        setCities(data.cities);
+        setCategories(data.categories);
+      } catch (error) {
+        console.error('Failed to fetch dropdown data:', error);
+      }
+    };
+
     getUserData();
+    fetchDropdownData();
   }, []);
 
   const handleLogout = async () => {
     await logOut();
     window.location.href = '/';
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.hero}>
@@ -39,7 +58,7 @@ export default function Homepage() {
       <div className={styles.content}>
         <Header user={user} />
       </div>
-      <ClientForm user={user} />
+      <ClientForm user={user} cities={cities} categories={categories} />
     </div>
   );
 }
