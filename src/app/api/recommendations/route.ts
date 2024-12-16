@@ -6,44 +6,37 @@ const prisma = new PrismaClient();
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { city, category, price } = body;
+    const { city, category, minBudget, maxBudget } = body;
 
-    let minPrice = 0;
-    let maxPrice = Number.MAX_SAFE_INTEGER;
+    const minPrice = minBudget ? parseInt(minBudget, 10) : 0;
+    const maxPrice = maxBudget ? parseInt(maxBudget, 10) : Number.MAX_SAFE_INTEGER;
 
-    if (price.includes('-')) {
-      [minPrice, maxPrice] = price.split('-').map((p: string) => parseInt(p, 10));
-    } else if (price.startsWith('>')) {
-      minPrice = parseInt(price.replace('>', '').trim(), 10);
-      maxPrice = Number.MAX_SAFE_INTEGER;
-    } else {
-      minPrice = parseInt(price, 10);
-      maxPrice = Number.MAX_SAFE_INTEGER;
+    if (isNaN(minPrice) || isNaN(maxPrice)) {
+      return NextResponse.json({ error: 'Invalid budget values' }, { status: 400 });
     }
 
     const places = await prisma.place.findMany({
-        where: {
-          city: city || undefined,
-          category: category || undefined,
-          price: {
-            gte: minPrice,
-            lte: maxPrice,
-          },
+      where: {
+        city: city || undefined,
+        category: category || undefined,
+        price: {
+          gte: minPrice,
+          lte: maxPrice,
         },
-        select: {
-          id: true,
-          name: true,
-          city: true,
-          description: true,
-          category: true,
-          price: true,
-          rating: true,
-          timeMinutes: true,
-        },
-      });
-      console.log(places);
-      return NextResponse.json(places);      
+      },
+      select: {
+        id: true,
+        name: true,
+        city: true,
+        description: true,
+        category: true,
+        price: true,
+        rating: true,
+        timeMinutes: true,
+      },
+    });
 
+    console.log(places);
     return NextResponse.json(places);
   } catch (error) {
     console.error('Error fetching recommendations:', error);

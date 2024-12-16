@@ -15,43 +15,56 @@ const ClientForm = ({
 }) => {
   const [location, setLocation] = useState('');
   const [category, setCategory] = useState('');
-  const [price, setPrice] = useState('');
+  const [minBudget, setMinBudget] = useState('');
+  const [maxBudget, setMaxBudget] = useState('');
   const [errors, setErrors] = useState({
     location: '',
     category: '',
-    price: '',
+    minBudget: '',
+    maxBudget: '',
   });
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     const newErrors = {
       location: !location.trim() ? 'Destination is required' : '',
       category: !category.trim() ? 'Travel style is required' : '',
-      price: !price.trim() ? 'Budget range is required' : '',
+      minBudget: isNaN(Number(minBudget)) || !minBudget.trim() ? 'Min budget must be a valid number' : '',
+      maxBudget: isNaN(Number(maxBudget)) || !maxBudget.trim() ? 'Max budget must be a valid number' : '',
     };
-  
+
+    if (Number(minBudget) > Number(maxBudget)) {
+      newErrors.minBudget = 'Min budget cannot be greater than max budget';
+      newErrors.maxBudget = 'Max budget cannot be less than min budget';
+    }
+
     setErrors(newErrors);
-  
+
     const hasErrors = Object.values(newErrors).some((error) => error !== '');
     if (hasErrors) {
       return;
     }
-  
+
     try {
       const response = await fetch('/api/recommendations', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ city: location, category, price }),
+        body: JSON.stringify({
+          city: location,
+          category,
+          minBudget: Number(minBudget),
+          maxBudget: Number(maxBudget),
+        }),
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to fetch recommendations');
       }
-  
+
       const data = await response.json();
       const recommendationsId = Date.now();
       localStorage.setItem('recommendations', JSON.stringify(data));
@@ -59,7 +72,7 @@ const ClientForm = ({
     } catch (error) {
       console.error('Error submitting form:', error);
     }
-  };    
+  };
 
   return (
     <div className={styles.searchContainer}>
@@ -114,27 +127,40 @@ const ClientForm = ({
             {errors.category && <p className={styles.errorMessage}>{errors.category}</p>}
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="price" className={styles.label}>
-              Budget Range
+            <label htmlFor="minBudget" className={styles.label}>
+              Min Budget
             </label>
-            <select
-              id="price"
-              value={price}
+            <input
+              id="minBudget"
+              type="text"
+              value={minBudget}
               onChange={(e) => {
-                setPrice(e.target.value);
-                setErrors((prev) => ({ ...prev, price: '' }));
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                setMinBudget(value);
+                setErrors((prev) => ({ ...prev, minBudget: '' }));
               }}
-              className={`${styles.select} ${errors.price ? styles.inputError : ''}`}
-            >
-              <option value="" disabled className={styles.placeholderOption}>
-                Select your budget range
-              </option>
-              <option value="0-50000">0 - 50,000</option>
-              <option value="50000-100000">50,000 - 100,000</option>
-              <option value="100000-150000">100,000 - 150,000</option>
-              <option value="150000+">&gt; 150,000</option>
-            </select>
-            {errors.price && <p className={styles.errorMessage}>{errors.price}</p>}
+              placeholder="e.g., 10000"
+              className={`${styles.input} ${errors.minBudget ? styles.inputError : ''}`}
+            />
+            {errors.minBudget && <p className={styles.errorMessage}>{errors.minBudget}</p>}
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="maxBudget" className={styles.label}>
+              Max Budget
+            </label>
+            <input
+              id="maxBudget"
+              type="text"
+              value={maxBudget}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                setMaxBudget(value);
+                setErrors((prev) => ({ ...prev, maxBudget: '' }));
+              }}
+              placeholder="e.g., 50000"
+              className={`${styles.input} ${errors.maxBudget ? styles.inputError : ''}`}
+            />
+            {errors.maxBudget && <p className={styles.errorMessage}>{errors.maxBudget}</p>}
           </div>
         </div>
         <button type="submit" className={styles.button}>
