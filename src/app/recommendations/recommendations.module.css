@@ -59,7 +59,6 @@
 
 .card {
   flex: 0 0 auto;
-  width: 340px;
   height: 274px;
   background: rgba(0, 0, 0, 0.5);
   border: 2px solid white;
@@ -71,6 +70,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  white-space: nowrap;
+  min-width: 340px;
+  max-width: max-content;
 }
 
 .cardTitle {

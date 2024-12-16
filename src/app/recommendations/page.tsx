@@ -19,11 +19,24 @@ export default function RecommendationsPage() {
     const carouselRef = useRef<HTMLDivElement>(null);
     const [isAtStart, setIsAtStart] = useState(true);
     const [isAtEnd, setIsAtEnd] = useState(false);
+
+    useEffect(() => {
+      const carousel = carouselRef.current;
+    
+      const handleScroll = () => {
+        if (!carousel) return;
+    
+        const { scrollLeft, scrollWidth, clientWidth } = carousel;
+        setIsAtStart(scrollLeft === 0);
+        setIsAtEnd(scrollLeft + clientWidth >= scrollWidth);
+      };
+      carousel?.addEventListener('scroll', handleScroll);
+      return () => carousel?.removeEventListener('scroll', handleScroll);
+    }, []);    
   
     useEffect(() => {
       const resultsId = new URLSearchParams(window.location.search).get('resultsId');
       if (resultsId) {
-        // Fetch recommendations from localStorage or API based on the resultsId
         const storedRecommendations = localStorage.getItem('recommendations');
         if (storedRecommendations) {
           setRecommendedDestinations(JSON.parse(storedRecommendations));
@@ -83,35 +96,39 @@ export default function RecommendationsPage() {
 
         {/* Recommendations Section */}
         <section className={styles.recommendations}>
+          {/* Previous Button */}
           {!isAtStart && (
             <button className={styles.prevButton} onClick={scrollLeft}>
               <img src="/left-arrow.png" alt="Scroll Left" className={styles.arrowImage} />
             </button>
           )}
+          
           <div className={styles.carouselWrapper}>
             <div className={styles.carousel} ref={carouselRef}>
-            {recommendedDestinations.map((destination) => (
-              <div key={destination.id} className={styles.card}>
-                <div className={styles.cardContent}>
-                  <h3 className={styles.cardTitle}>{destination.name}</h3>
-                  <p className={styles.city}>{destination.city}</p>
-                  <div className={styles.details}>
-                    <p><strong>Category:</strong> {destination.category || 'N/A'}</p>
-                    <p><strong>Price:</strong> {destination.price || '0'}</p>
-                    <p><strong>Rating:</strong> {destination.rating || 'N/A'}</p>
-                    <p><strong>Estimated Time:</strong> {destination.timeMinutes || '-'}</p>
+              {recommendedDestinations.map((destination) => (
+                <div key={destination.id} className={styles.card}>
+                  <div className={styles.cardContent}>
+                    <h3 className={styles.cardTitle}>{destination.name}</h3>
+                    <p className={styles.city}>{destination.city}</p>
+                    <div className={styles.details}>
+                      <p><strong>Category:</strong> {destination.category || 'N/A'}</p>
+                      <p><strong>Price:</strong> {destination.price || '0'}</p>
+                      <p><strong>Rating:</strong> {destination.rating || 'N/A'}</p>
+                      <p><strong>Estimated Time:</strong> {destination.timeMinutes || '-'}</p>
+                    </div>
+                    <button
+                      className={styles.viewDescriptionButton}
+                      onClick={() => handleViewDescription(destination)}
+                    >
+                      View Description
+                    </button>
                   </div>
-                  <button
-                    className={styles.viewDescriptionButton}
-                    onClick={() => handleViewDescription(destination)}
-                  >
-                    View Description
-                  </button>
                 </div>
-              </div>
-            ))}
+              ))}
             </div>
           </div>
+
+          {/* Next Button */}
           {!isAtEnd && (
             <button className={styles.nextButton} onClick={scrollRight}>
               <img src="/right-arrow.png" alt="Scroll Right" className={styles.arrowImage} />
