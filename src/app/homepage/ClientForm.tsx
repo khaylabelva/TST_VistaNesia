@@ -23,23 +23,43 @@ const ClientForm = ({
   });
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     const newErrors = {
       location: !location.trim() ? 'Destination is required' : '',
       category: !category.trim() ? 'Travel style is required' : '',
       price: !price.trim() ? 'Budget range is required' : '',
     };
-
+  
     setErrors(newErrors);
-
+  
     const hasErrors = Object.values(newErrors).some((error) => error !== '');
     if (hasErrors) {
       return;
     }
-    router.push('/recommendations');
-  };
+  
+    try {
+      const response = await fetch('/api/recommendations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ city: location, category, price }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch recommendations');
+      }
+  
+      const data = await response.json();
+      const recommendationsId = Date.now();
+      localStorage.setItem('recommendations', JSON.stringify(data));
+      router.push(`/recommendations?resultsId=${recommendationsId}`);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };    
 
   return (
     <div className={styles.searchContainer}>
