@@ -243,3 +243,12 @@
   scrollbar-width: none;
 }
 
+.noResults {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  text-align: center;
+  font-size: 1rem;
+  color: #ffffff;
+}

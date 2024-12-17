@@ -15,86 +15,91 @@ interface Destination {
 }
 
 export default function RecommendationsPage() {
-    const [recommendedDestinations, setRecommendedDestinations] = useState<Destination[]>([]);
-    const carouselRef = useRef<HTMLDivElement>(null);
-    const [isAtStart, setIsAtStart] = useState(true);
-    const [isAtEnd, setIsAtEnd] = useState(false);
+  const [recommendedDestinations, setRecommendedDestinations] = useState<Destination[]>([]);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
 
-    useEffect(() => {
-      const carousel = carouselRef.current;
-    
-      const handleScroll = () => {
-        if (!carousel) return;
-    
-        const { scrollLeft, scrollWidth, clientWidth } = carousel;
-        setIsAtStart(scrollLeft === 0);
-        setIsAtEnd(scrollLeft + clientWidth >= scrollWidth);
-      };
-      carousel?.addEventListener('scroll', handleScroll);
-      return () => carousel?.removeEventListener('scroll', handleScroll);
-    }, []);    
-  
-    useEffect(() => {
-      const resultsId = new URLSearchParams(window.location.search).get('resultsId');
-      if (resultsId) {
-        const storedRecommendations = localStorage.getItem('recommendations');
-        if (storedRecommendations) {
-          setRecommendedDestinations(JSON.parse(storedRecommendations));
-        }
+  useEffect(() => {
+    const carousel = carouselRef.current;
+
+    const handleScroll = () => {
+      if (!carousel) return;
+
+      const { scrollLeft, scrollWidth, clientWidth } = carousel;
+      setIsAtStart(scrollLeft === 0);
+      setIsAtEnd(scrollLeft + clientWidth >= scrollWidth);
+    };
+    carousel?.addEventListener('scroll', handleScroll);
+    return () => carousel?.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const resultsId = new URLSearchParams(window.location.search).get('resultsId');
+    if (resultsId) {
+      const storedRecommendations = localStorage.getItem('recommendations');
+      if (storedRecommendations) {
+        setRecommendedDestinations(JSON.parse(storedRecommendations));
       }
-    }, []);
-  
-    const scrollLeft = () => {
-      const carousel = carouselRef.current;
-      if (carousel) {
-        const scrollAmount = carousel.clientWidth / 2;
-        carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-      }
-    };
-  
-    const scrollRight = () => {
-      const carousel = carouselRef.current;
-      if (carousel) {
-        const scrollAmount = carousel.clientWidth / 2;
-        carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      }
-    };
+    }
+  }, []);
 
-    const [expandedCard, setExpandedCard] = useState<Destination | null>(null);
+  const scrollLeft = () => {
+    const carousel = carouselRef.current;
+    if (carousel) {
+      const scrollAmount = carousel.clientWidth / 2;
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    }
+  };
 
-    const handleViewDescription = (destination: Destination) => {
-        setExpandedCard(destination);
-    };
+  const scrollRight = () => {
+    const carousel = carouselRef.current;
+    if (carousel) {
+      const scrollAmount = carousel.clientWidth / 2;
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
-    const handleCloseModal = () => {
-        setExpandedCard(null);
-    };
+  const [expandedCard, setExpandedCard] = useState<Destination | null>(null);
 
-    return (
-      <div className={styles.container}>
-        {/* Header Section */}
-        <section className={styles.header}>
-          <div className={styles.headerContent}>
-            <div className={styles.text}>
-              <h1>Recommended Destinations</h1>
-              <p>
-                Embark on your dream journey by choosing destinations that delight
-                not only your eyes but also your soul. Each place holds stories
-                and adventures waiting to be explored.
-              </p>
-            </div>
-            <div className={styles.imageContainer}>
-              <img src="/header.jpg" alt="Nature" className={styles.headerImage} />
-            </div>
+  const handleViewDescription = (destination: Destination) => {
+    setExpandedCard(destination);
+  };
+
+  const handleCloseModal = () => {
+    setExpandedCard(null);
+  };
+
+  return (
+    <div className={styles.container}>
+      {/* Header Section */}
+      <section className={styles.header}>
+        <div className={styles.headerContent}>
+          <div className={styles.text}>
+            <h1>Recommended Destinations</h1>
+            <p>
+              Embark on your dream journey by choosing destinations that delight
+              not only your eyes but also your soul. Each place holds stories
+              and adventures waiting to be explored.
+            </p>
           </div>
-        </section>
-
-        {/* Title Section */}
-        <div className={styles.headerTop}>
-          <h2 className={styles.title}>There&rsquo;s {recommendedDestinations.length} places for you to explore!</h2>
+          <div className={styles.imageContainer}>
+            <img src="/header.jpg" alt="Nature" className={styles.headerImage} />
+          </div>
         </div>
+      </section>
 
-        {/* Recommendations Section */}
+      {/* Title Section */}
+      <div className={styles.headerTop}>
+        {recommendedDestinations.length > 0 && (
+          <h2 className={styles.title}>
+            There’s {recommendedDestinations.length} places for you to explore!
+          </h2>
+        )}
+      </div>
+
+      {/* Recommendations Section */}
+      {recommendedDestinations.length > 0 ? (
         <section className={styles.recommendations}>
           {/* Previous Button */}
           {!isAtStart && (
@@ -102,7 +107,7 @@ export default function RecommendationsPage() {
               <img src="/left-arrow.png" alt="Scroll Left" className={styles.arrowImage} />
             </button>
           )}
-          
+
           <div className={styles.carouselWrapper}>
             <div className={styles.carousel} ref={carouselRef}>
               {recommendedDestinations.map((destination) => (
@@ -129,27 +134,29 @@ export default function RecommendationsPage() {
           </div>
 
           {/* Next Button */}
-          {!isAtEnd && (
+          {!isAtEnd && recommendedDestinations.length > 1 && (
             <button className={styles.nextButton} onClick={scrollRight}>
               <img src="/right-arrow.png" alt="Scroll Right" className={styles.arrowImage} />
             </button>
           )}
         </section>
+      ) : (
+        <div className={styles.noResults}>
+          <p>No destinations available to explore!</p>
+        </div>
+      )}
 
-        {expandedCard && (
-          <div className={styles.modal}>
-            <div className={styles.modalContent}>
-              <h2>{expandedCard.name}</h2>
-              <p>{expandedCard.description}</p>
-              <button
-                className={styles.closeButton}
-                onClick={handleCloseModal}
-              >
-                ✖ Close
-              </button>
-            </div>
+      {expandedCard && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <h2>{expandedCard.name}</h2>
+            <p>{expandedCard.description}</p>
+            <button className={styles.closeButton} onClick={handleCloseModal}>
+              ✖ Close
+            </button>
           </div>
-        )}
-      </div>
-    );
+        </div>
+      )}
+    </div>
+  );
 }
