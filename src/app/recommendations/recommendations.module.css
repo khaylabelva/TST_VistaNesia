@@ -1,11 +1,27 @@
 .container {
-  padding: 60px 60px 0px;
+  padding: 40px 60px 0px;
   color: #ffffff;
   background: url('/recommendation.jpg') no-repeat center center/cover;
   background-attachment: fixed;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.backToHome {
+  margin-left: 50px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.backToHome a {
+  text-decoration: none;
+  color: #e4e5e7; /* Warna biru untuk link */
+  transition: color 0.2s ease-in-out;
+}
+
+.backToHome a:hover {
+  color: #f8f9fa; /* Warna biru lebih tua saat dihover */
 }
 
 .header {

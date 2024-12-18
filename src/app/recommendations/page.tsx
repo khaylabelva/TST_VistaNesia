@@ -72,6 +72,11 @@ export default function RecommendationsPage() {
 
     return (
       <div className={styles.container}>
+        {/* Back to Home Link */}
+        <div className={styles.backToHome}>
+          <a href="/homepage">← Back to Home</a>
+        </div>
+
         {/* Header Section */}
         <section className={styles.header}>
           <div className={styles.headerContent}>
