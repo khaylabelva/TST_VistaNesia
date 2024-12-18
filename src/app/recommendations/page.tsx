@@ -88,70 +88,63 @@ export default function RecommendationsPage() {
             </div>
           </div>
         </section>
-  
+
         {/* Title Section */}
         <div className={styles.headerTop}>
-          {recommendedDestinations.length > 0 && (
-            <h2 className={styles.title}>
-              There’s {recommendedDestinations.length} places for you to explore!
-            </h2>
-          )}
+          <h2 className={styles.title}>There&rsquo;s {recommendedDestinations.length} places for you to explore!</h2>
         </div>
-  
+
         {/* Recommendations Section */}
-        {recommendedDestinations.length > 0 ? (
-          <section className={styles.recommendations}>
-            {/* Previous Button */}
-            {!isAtStart && (
-              <button className={styles.prevButton} onClick={scrollLeft}>
-                <img src="/left-arrow.png" alt="Scroll Left" className={styles.arrowImage} />
-              </button>
-            )}
-  
-            <div className={styles.carouselWrapper}>
-              <div className={styles.carousel} ref={carouselRef}>
-                {recommendedDestinations.map((destination) => (
-                  <div key={destination.id} className={styles.card}>
-                    <div className={styles.cardContent}>
-                      <h3 className={styles.cardTitle}>{destination.name}</h3>
-                      <p className={styles.city}>{destination.city}</p>
-                      <div className={styles.details}>
-                        <p><strong>Category:</strong> {destination.category || 'N/A'}</p>
-                        <p><strong>Price:</strong> {destination.price || '0'}</p>
-                        <p><strong>Rating:</strong> {destination.rating || 'N/A'}</p>
-                        <p><strong>Estimated Time:</strong> {destination.timeMinutes || '-'}</p>
-                      </div>
-                      <button
-                        className={styles.viewDescriptionButton}
-                        onClick={() => handleViewDescription(destination)}
-                      >
-                        View Description
-                      </button>
+        <section className={styles.recommendations}>
+          {/* Previous Button */}
+          {!isAtStart && (
+            <button className={styles.prevButton} onClick={scrollLeft}>
+              <img src="/left-arrow.png" alt="Scroll Left" className={styles.arrowImage} />
+            </button>
+          )}
+          
+          <div className={styles.carouselWrapper}>
+            <div className={styles.carousel} ref={carouselRef}>
+              {recommendedDestinations.map((destination) => (
+                <div key={destination.id} className={styles.card}>
+                  <div className={styles.cardContent}>
+                    <h3 className={styles.cardTitle}>{destination.name}</h3>
+                    <p className={styles.city}>{destination.city}</p>
+                    <div className={styles.details}>
+                      <p><strong>Category:</strong> {destination.category || 'N/A'}</p>
+                      <p><strong>Price:</strong> {destination.price || '0'}</p>
+                      <p><strong>Rating:</strong> {destination.rating || 'N/A'}</p>
+                      <p><strong>Estimated Time:</strong> {destination.timeMinutes || '-'}</p>
                     </div>
+                    <button
+                      className={styles.viewDescriptionButton}
+                      onClick={() => handleViewDescription(destination)}
+                    >
+                      View Description
+                    </button>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-  
-            {/* Next Button */}
-            {!isAtEnd && recommendedDestinations.length > 1 && (
-              <button className={styles.nextButton} onClick={scrollRight}>
-                <img src="/right-arrow.png" alt="Scroll Right" className={styles.arrowImage} />
-              </button>
-            )}
-          </section>
-        ) : (
-          <div className={styles.noResults}>
-            <p>No destinations available to explore!</p>
           </div>
-        )}
-  
+
+          {/* Next Button */}
+          {!isAtEnd && (
+            <button className={styles.nextButton} onClick={scrollRight}>
+              <img src="/right-arrow.png" alt="Scroll Right" className={styles.arrowImage} />
+            </button>
+          )}
+        </section>
+
         {expandedCard && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>
               <h2>{expandedCard.name}</h2>
               <p>{expandedCard.description}</p>
-              <button className={styles.closeButton} onClick={handleCloseModal}>
+              <button
+                className={styles.closeButton}
+                onClick={handleCloseModal}
+              >
                 ✖ Close
               </button>
             </div>
@@ -159,4 +152,4 @@ export default function RecommendationsPage() {
         )}
       </div>
     );
-  }
+}
