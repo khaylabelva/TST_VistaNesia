@@ -16,12 +16,12 @@
 
 .backToHome a {
   text-decoration: none;
-  color: #e4e5e7; /* Warna biru untuk link */
+  color: #e4e5e7;
   transition: color 0.2s ease-in-out;
 }
 
 .backToHome a:hover {
-  color: #f8f9fa; /* Warna biru lebih tua saat dihover */
+  color: #f8f9fa;
 }
 
 .header {
@@ -111,19 +111,20 @@
 }
 
 .viewDescriptionButton {
-  padding: 5px 12px;
-  background-color: white;
-  color: black;
+  padding: 5px 15px;
   font-size: 13px;
-  border: none;
-  border-radius: 18px;
   cursor: pointer;
-  transition: background-color 0.3s;
   margin-top: 10px;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  border-radius: 10px;
+  transition: all 0.3s;
 }
 
 .viewDescriptionButton:hover {
-  background-color: #f0f0f0;
+  background-color: white;
+  color: black;
 }
 
 .modal {
@@ -140,28 +141,51 @@
 }
 
 .modalContent {
-  background-color: white;
-  color: black;
+  background-color: #fff;
+  color: #000;
   padding: 20px;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 500px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  max-height: 500px;
+  overflow-y: auto;
+  width: auto;
+  max-width: 60%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
 
+.modalTitle {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 13px;
+  text-align: center;
+  border-bottom: 1px solid #a19c9c;
+  padding-bottom: 10px;
+}
+
+.modalDescription {
+  font-size: 0.9rem;
+  text-align: justify;
+  margin-top: 15px;
+  line-height: 1.5;
+}
+
 .closeButton {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #d9534f;
-  color: white;
-  border: none;
+  margin-top: 15px;
+  padding: 5px 15px;
+  font-size: 0.9rem;
+  background-color: transparent;
+  color: #000;
+  border: 2px solid #000;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
+  font-weight: bold;
 }
 
 .closeButton:hover {
-  background-color: #c9302c;
+  background-color: #000;
+  color: #fff;
 }
 
 .prevButton, .nextButton {

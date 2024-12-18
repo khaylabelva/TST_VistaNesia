@@ -146,19 +146,19 @@ export default function RecommendationsPage() {
         </section>
 
         {expandedCard && (
-          <div className={styles.modal}>
-            <div className={styles.modalContent}>
-              <h2>{expandedCard.name}</h2>
-              <p>{expandedCard.description}</p>
-              <button
-                className={styles.closeButton}
-                onClick={handleCloseModal}
-              >
-                ✖ Close
-              </button>
-            </div>
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <h2 className={styles.modalTitle}>{expandedCard.name}</h2>
+            <p className={styles.modalDescription}>{expandedCard.description}</p>
+            <button
+              className={styles.closeButton}
+              onClick={handleCloseModal}
+            >
+              ✖ Close
+            </button>
           </div>
-        )}
+        </div>
+      )}
       </div>
     );
 }
