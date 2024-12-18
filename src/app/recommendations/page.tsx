@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './recommendations.module.css';
 
-interface Destination {
+interface Destination { 
   id: number;
   name: string;
   description: string;
@@ -19,6 +19,7 @@ export default function RecommendationsPage() {
     const carouselRef = useRef<HTMLDivElement>(null);
     const [isAtStart, setIsAtStart] = useState(true);
     const [isAtEnd, setIsAtEnd] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
       const carousel = carouselRef.current;
@@ -33,7 +34,7 @@ export default function RecommendationsPage() {
       carousel?.addEventListener('scroll', handleScroll);
       return () => carousel?.removeEventListener('scroll', handleScroll);
     }, []);    
-  
+
     useEffect(() => {
       const resultsId = new URLSearchParams(window.location.search).get('resultsId');
       if (resultsId) {
@@ -43,7 +44,7 @@ export default function RecommendationsPage() {
         }
       }
     }, []);
-  
+
     const scrollLeft = () => {
       const carousel = carouselRef.current;
       if (carousel) {
@@ -51,7 +52,7 @@ export default function RecommendationsPage() {
         carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
       }
     };
-  
+
     const scrollRight = () => {
       const carousel = carouselRef.current;
       if (carousel) {
@@ -70,12 +71,40 @@ export default function RecommendationsPage() {
         setExpandedCard(null);
     };
 
+    const handleBackToHomeClick = (e: React.MouseEvent) => {
+      e.preventDefault();
+      setShowPopup(true);
+    };
+
+    const handleConfirmRedirect = () => {
+      localStorage.setItem('recommendations', JSON.stringify(recommendedDestinations));
+      window.location.href = '/homepage';
+    };
+
+    const handleCancelRedirect = () => {
+      setShowPopup(false);
+    };
+
     return (
       <div className={styles.container}>
         {/* Back to Home Link */}
         <div className={styles.backToHome}>
-          <a href="/homepage">← Back to Home</a>
+          <a href="#" onClick={handleBackToHomeClick}>← Back to Home</a>
         </div>
+
+        {/* Confirmation Popup */}
+        {showPopup && (
+          <div className={styles.popup}>
+            <div className={styles.popupContent}>
+              <h3>Do you want to save your recommendations?</h3>
+              <p>If you go back now, your selected destinations may not be saved.</p>
+              <div className={styles.popupButtons}>
+                <button onClick={handleCancelRedirect}>No, Don't Save</button>
+                <button onClick={handleConfirmRedirect}>Yes, Save & Go Back</button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Header Section */}
         <section className={styles.header}>
@@ -98,7 +127,7 @@ export default function RecommendationsPage() {
         <div className={styles.headerTop}>
           <h2 className={styles.title}>
             {recommendedDestinations.length > 0
-              ? `There’s ${recommendedDestinations.length} places for you to explore!`
+              ? `There are ${recommendedDestinations.length} places for you to explore!`
               : "No destinations available to explore!"}
           </h2>
         </div>
@@ -121,9 +150,9 @@ export default function RecommendationsPage() {
                     <p className={styles.city}>{destination.city}</p>
                     <div className={styles.details}>
                       <p><strong>Category:</strong> {destination.category || 'N/A'}</p>
-                      <p><strong>Price:</strong> {destination.price || '0'}</p>
+                      <p><strong>Price:</strong> {destination.price ? `Rp ${destination.price}` : 'Rp 0'}</p>
                       <p><strong>Rating:</strong> {destination.rating || 'N/A'}</p>
-                      <p><strong>Estimated Time:</strong> {destination.timeMinutes || '-'}</p>
+                      <p><strong>Estimated Time:</strong>{' '}{destination.timeMinutes ? `${destination.timeMinutes} minutes` : '0 minutes'}</p>
                     </div>
                     <button
                       className={styles.viewDescriptionButton}

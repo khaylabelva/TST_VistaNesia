@@ -292,3 +292,73 @@
   font-size: 1rem;
   color: #ffffff;
 }
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  color: #333;
+}
+
+.popupContent h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.popupContent p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.popupButtons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.popupButtons button {
+  padding: 5px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.popupButtons button:first-child {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+.popupButtons button:first-child:hover {
+  background-color: black;
+  color: white;
+}
+
+.popupButtons button:last-child {
+  background-color: black;
+  color: white;
+}
+
+.popupButtons button:last-child:hover {
+  background-color: #a3a2a2;
+}

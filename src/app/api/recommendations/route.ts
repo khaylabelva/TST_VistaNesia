@@ -24,6 +24,10 @@ export async function POST(req: NextRequest) {
           lte: maxPrice,
         },
       },
+      orderBy: [
+        { rating: 'desc' },
+        { price: 'asc' },
+      ],
       select: {
         id: true,
         name: true,
