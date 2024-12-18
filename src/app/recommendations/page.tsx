@@ -99,7 +99,7 @@ export default function RecommendationsPage() {
               <h3>Do you want to save your recommendations?</h3>
               <p>If you go back now, your selected destinations may not be saved.</p>
               <div className={styles.popupButtons}>
-                <button onClick={handleCancelRedirect}>No, Don't Save</button>
+              <button onClick={handleCancelRedirect}>No, Don&apos;t Save</button>
                 <button onClick={handleConfirmRedirect}>Yes, Save & Go Back</button>
               </div>
             </div>
