@@ -91,7 +91,11 @@ export default function RecommendationsPage() {
 
         {/* Title Section */}
         <div className={styles.headerTop}>
-          <h2 className={styles.title}>There&rsquo;s {recommendedDestinations.length} places for you to explore!</h2>
+          <h2 className={styles.title}>
+            {recommendedDestinations.length > 0
+              ? `There’s ${recommendedDestinations.length} places for you to explore!`
+              : "No destinations available to explore!"}
+          </h2>
         </div>
 
         {/* Recommendations Section */}
@@ -129,7 +133,7 @@ export default function RecommendationsPage() {
           </div>
 
           {/* Next Button */}
-          {!isAtEnd && (
+          {!isAtEnd && recommendedDestinations.length > 1 && (
             <button className={styles.nextButton} onClick={scrollRight}>
               <img src="/right-arrow.png" alt="Scroll Right" className={styles.arrowImage} />
             </button>
