@@ -1,5 +1,5 @@
 .container {
-    padding: 40px 60px 0px;
+    padding: 40px 60px 40px;
     color: #ffffff;
     background: url('/history.jpg') no-repeat center center/cover;
     background-attachment: fixed;
@@ -46,7 +46,7 @@
     border: 1px solid #d3d3d3;
     padding: 15px;
     border-radius: 10px;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     width: 100%;
     max-width: 400px;
   }  

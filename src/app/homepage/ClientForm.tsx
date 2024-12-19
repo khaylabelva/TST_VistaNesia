@@ -26,7 +26,7 @@ const ClientForm = ({
   const router = useRouter();
 
   const handleInputChange = (field: string, value: string) => {
-    let updatedData = { location, category, minBudget, maxBudget };
+    const updatedData = { location, category, minBudget, maxBudget };
     
     switch (field) {
       case 'location':
