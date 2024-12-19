@@ -9,11 +9,35 @@
     align-items: center;
   }
   
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 40px;
+  }
+  
+  .backToHome {
+    position: absolute;
+    left: 0;
+    font-size: 0.9rem;
+    color: #c4c4c4;
+    text-decoration: none;
+    padding: 8px 16px;
+  }
+  
+  .backToHome:hover {
+    color: #ffffff;
+  }
+  
   .title {
     font-size: 2.5rem;
     font-weight: bold;
-    margin-bottom: 40px;
-  }
+    text-align: center;
+    flex-grow: 1;
+  }  
   
   .profileCard {
     display: flex;
@@ -22,7 +46,7 @@
     border: 1px solid #d3d3d3;
     padding: 15px;
     border-radius: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
     width: 100%;
     max-width: 400px;
   }  
@@ -30,9 +54,9 @@
   .avatar {
     width: 70px;
     height: 70px;
-    background-color: #007bff;
+    background-color: #9ea2a5;
     color: white;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
     border-radius: 50%;
     display: flex;
@@ -86,9 +110,8 @@
   }
   
   .seeResult {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
+    color: #eaeef3;
+    text-decoration: underline;
   }
   
   .seeResult:hover {

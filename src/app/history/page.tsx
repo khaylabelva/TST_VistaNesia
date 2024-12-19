@@ -1,16 +1,54 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import styles from "./history.module.css";
+import { fetchUser } from "../auth/auth.action";
 
 const HistoryPage = () => {
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userData = await fetchUser();
+        if (!userData) {
+          window.location.href = "/auth/sign-in";
+        } else {
+          setUser(userData);
+        }
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getUserData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <div>Error: User not found</div>;
+  }
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>My Profile</h1>
+      <div className={styles.header}>
+        <a href="/homepage" className={styles.backToHome}>
+            ← Back to Home
+        </a>
+        <h1 className={styles.title}>My Profile</h1>
+      </div>
 
       <div className={styles.profileCard}>
-        <div className={styles.avatar}>B</div>
+        <div className={styles.avatar}>{user.name[0].toUpperCase()}</div>
         <div className={styles.profileInfo}>
-          <h2 className={styles.username}>belva</h2>
-          <p className={styles.email}>belvakhayla@gmail.com</p>
+          <h2 className={styles.username}>{user.name}</h2>
+          <p className={styles.email}>{user.email}</p>
         </div>
       </div>
 
