@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './recommendations.module.css';
 import { fetchUser } from '../auth/auth.action';
+
 interface Destination { 
   id: number;
   name: string;
@@ -20,7 +21,7 @@ export default function RecommendationsPage() {
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null); // For user data
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   
   useEffect(() => {
     const getUserData = async () => {
@@ -89,12 +90,38 @@ export default function RecommendationsPage() {
   };
 
   const handleConfirmRedirect = () => {
-    if (user) {
-      const userKey = `recommendations_${user.email}`;
-      localStorage.setItem(userKey, JSON.stringify(recommendedDestinations));
+    const formData = localStorage.getItem("clientFormData");
+    if (formData) {
+      const parsedFormData = JSON.parse(formData);
+  
+      if (user) {
+        const userKey = `recommendations_${user.email}`;
+        const storedData = localStorage.getItem(userKey);
+  
+        let existingData = [];
+        try {
+          existingData = storedData ? JSON.parse(storedData) : [];
+          if (!Array.isArray(existingData)) {
+            existingData = [];
+          }
+        } catch (error) {
+          console.error("Error parsing stored data:", error);
+        }
+  
+        const newRecommendation = {
+          id: Date.now(),
+          date: new Date().toISOString(),
+          form: parsedFormData,
+          recommendations: recommendedDestinations,
+        };
+  
+        const updatedData = [...existingData, newRecommendation];
+        localStorage.setItem(userKey, JSON.stringify(updatedData));
+      }
     }
-    window.location.href = '/homepage';
-  };
+  
+    window.location.href = "/homepage";
+  };    
 
   const handleCancelRedirect = () => {
     setShowPopup(false);

@@ -25,6 +25,33 @@ const ClientForm = ({
   });
   const router = useRouter();
 
+  const handleInputChange = (field: string, value: string) => {
+    let updatedData = { location, category, minBudget, maxBudget };
+    
+    switch (field) {
+      case 'location':
+        updatedData.location = value;
+        setLocation(value);
+        break;
+      case 'category':
+        updatedData.category = value;
+        setCategory(value);
+        break;
+      case 'minBudget':
+        updatedData.minBudget = value;
+        setMinBudget(value);
+        break;
+      case 'maxBudget':
+        updatedData.maxBudget = value;
+        setMaxBudget(value);
+        break;
+      default:
+        break;
+    }
+  
+    localStorage.setItem('clientFormData', JSON.stringify(updatedData));
+  };    
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -86,6 +113,7 @@ const ClientForm = ({
               id="location"
               value={location}
               onChange={(e) => {
+                handleInputChange('location', e.target.value);
                 setLocation(e.target.value);
                 setErrors((prev) => ({ ...prev, location: '' }));
               }}
@@ -110,6 +138,7 @@ const ClientForm = ({
               id="category"
               value={category}
               onChange={(e) => {
+                handleInputChange('category', e.target.value);
                 setCategory(e.target.value);
                 setErrors((prev) => ({ ...prev, category: '' }));
               }}
@@ -136,6 +165,7 @@ const ClientForm = ({
               value={minBudget}
               onChange={(e) => {
                 const value = e.target.value.replace(/[^0-9]/g, '');
+                handleInputChange('minBudget', e.target.value);
                 setMinBudget(value);
                 setErrors((prev) => ({ ...prev, minBudget: '' }));
               }}
@@ -154,6 +184,7 @@ const ClientForm = ({
               value={maxBudget}
               onChange={(e) => {
                 const value = e.target.value.replace(/[^0-9]/g, '');
+                handleInputChange('maxBudget', e.target.value);
                 setMaxBudget(value);
                 setErrors((prev) => ({ ...prev, maxBudget: '' }));
               }}

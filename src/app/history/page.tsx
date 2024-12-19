@@ -33,7 +33,12 @@ const HistoryPage = () => {
       const userKey = `recommendations_${user.email}`;
       const storedRecommendations = localStorage.getItem(userKey);
       if (storedRecommendations) {
-        setSavedDestinations(JSON.parse(storedRecommendations));
+        try {
+          const recommendations = JSON.parse(storedRecommendations);
+          setSavedDestinations(recommendations);
+        } catch (error) {
+          console.error("Failed to parse recommendations:", error);
+        }
       }
     }
   }, [user]);
@@ -74,23 +79,32 @@ const HistoryPage = () => {
           <span>See Result</span>
         </div>
         {savedDestinations.length > 0 ? (
-          savedDestinations.map((destination, index) => (
-            <div key={destination.id} className={styles.tableRow}>
-              <span>{index + 1}</span>
-              <span>{new Date().toLocaleDateString()}</span>
-              <span>{destination.city}</span>
-              <span>{destination.category}</span>
-              <span>{destination.price}</span>
-              <span>{destination.price}</span>
-              <span>
-                <a href="#" className={styles.seeResult}>
-                  View
-                </a>
-              </span>
-            </div>
-          ))
+          savedDestinations.map((destination, index) => {
+            const resultDate = new Date(destination.date);
+            const formattedDate = isNaN(resultDate.getTime())
+              ? "Invalid Date"
+              : resultDate.toLocaleDateString();
+            return (
+              <div key={destination.id || index} className={styles.tableRow}>
+                <span>{index + 1}</span>
+                <span>{formattedDate}</span>
+                <span>{destination.form.location || "N/A"}</span>
+                <span>{destination.form.category || "N/A"}</span>
+                <span>{destination.form.minBudget || "N/A"}</span>
+                <span>{destination.form.maxBudget || "N/A"}</span>
+                <span>
+                  <a
+                    href={`/recommendations/?resultsId=${destination.id}`}
+                    className={styles.seeResult}
+                  >
+                    View
+                  </a>
+                </span>
+              </div>
+            );
+          })
         ) : (
-          <div>No saved destinations</div>
+          <div className={styles.noData}>No saved destinations</div>
         )}
       </div>
     </div>
