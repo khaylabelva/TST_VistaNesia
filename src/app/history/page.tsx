@@ -45,10 +45,20 @@ const HistoryPage = () => {
 
   if (loading) {
     return (
-      <div className={styles.loadingContainer}>
-        <img src="/loading.gif" alt="Loading..." className={styles.loadingGif} />
+      <div className={styles.loadingWrapper}>
+        <div className={styles.loadingContent}>
+          <img
+            src="/loading.gif"
+            alt="Loading..."
+            className={styles.loadingGif}
+          />
+          <h2 className={styles.loadingTitle}>Hold Tight, Almost There!</h2>
+          <p className={styles.loadingDescription}>
+            Your recommendations are loading...
+          </p>
+        </div>
       </div>
-    );
+    );    
   }
 
   if (!user) {

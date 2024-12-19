@@ -45,8 +45,18 @@ export default function Homepage() {
 
   if (loading) {
     return (
-      <div className={styles.loadingContainer}>
-        <img src="/loading.gif" alt="Loading..." className={styles.loadingGif} />
+      <div className={styles.loadingWrapper}>
+        <div className={styles.loadingContent}>
+          <img
+            src="/loading.gif"
+            alt="Loading..."
+            className={styles.loadingGif}
+          />
+          <h2 className={styles.loadingTitle}>You’re All Set!</h2>
+          <p className={styles.loadingDescription}>
+            We're taking you back to the homepage. See you there!
+          </p>
+        </div>
       </div>
     );
   }

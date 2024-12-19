@@ -132,8 +132,18 @@ export default function RecommendationsPage() {
 
   if (loading) {
     return (
-      <div className={styles.loadingContainer}>
-        <img src="/loading.gif" alt="Loading..." className={styles.loadingGif} />
+      <div className={styles.loadingWrapper}>
+        <div className={styles.loadingContent}>
+          <img
+            src="/loading.gif"
+            alt="Loading..."
+            className={styles.loadingGif}
+          />
+          <h2 className={styles.loadingTitle}>Hold on a moment!</h2>
+          <p className={styles.loadingDescription}>
+            We’re finding the best destinations for you. It won’t take long, promise!
+          </p>
+        </div>
       </div>
     );
   }
