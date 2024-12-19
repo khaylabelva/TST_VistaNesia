@@ -52,60 +52,62 @@ const HistoryPage = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <a href="/homepage" className={styles.backToHome}>
-          ← Back to Home
-        </a>
-        <h1 className={styles.title}>My Profile</h1>
-      </div>
-
-      <div className={styles.profileCard}>
-        <div className={styles.avatar}>{user.name[0].toUpperCase()}</div>
-        <div className={styles.profileInfo}>
-          <h2 className={styles.username}>{user.name}</h2>
-          <p className={styles.email}>{user.email}</p>
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <a href="/homepage" className={styles.backToHome}>
+            ← Back to Home
+          </a>
+          <h1 className={styles.title}>My Profile</h1>
         </div>
-      </div>
 
-      <div className={styles.table}>
-        <div className={styles.tableHeader}>
-          <span>No.</span>
-          <span>Date</span>
-          <span>Destination</span>
-          <span>Category</span>
-          <span>Min Budget</span>
-          <span>Max Budget</span>
-          <span>See Result</span>
+        <div className={styles.profileCard}>
+          <div className={styles.avatar}>{user.name[0].toUpperCase()}</div>
+          <div className={styles.profileInfo}>
+            <h2 className={styles.username}>{user.name}</h2>
+            <p className={styles.email}>{user.email}</p>
+          </div>
         </div>
-        {savedDestinations.length > 0 ? (
-          savedDestinations.map((destination, index) => {
-            const resultDate = new Date(destination.date);
-            const formattedDate = isNaN(resultDate.getTime())
-              ? "Invalid Date"
-              : resultDate.toLocaleDateString();
-            return (
-              <div key={destination.id || index} className={styles.tableRow}>
-                <span>{index + 1}</span>
-                <span>{formattedDate}</span>
-                <span>{destination.form.location || "N/A"}</span>
-                <span>{destination.form.category || "N/A"}</span>
-                <span>{destination.form.minBudget || "N/A"}</span>
-                <span>{destination.form.maxBudget || "N/A"}</span>
-                <span>
-                  <a
-                    href={`/recommendations/?resultsId=${destination.id}`}
-                    className={styles.seeResult}
-                  >
-                    View
-                  </a>
-                </span>
-              </div>
-            );
-          })
-        ) : (
-          <div className={styles.noData}>No saved destinations</div>
-        )}
+
+        <div className={styles.table}>
+          <div className={styles.tableHeader}>
+            <span>No.</span>
+            <span>Date</span>
+            <span>Destination</span>
+            <span>Category</span>
+            <span>Min Budget</span>
+            <span>Max Budget</span>
+            <span>See Result</span>
+          </div>
+          {savedDestinations.length > 0 ? (
+            savedDestinations.map((destination, index) => {
+              const resultDate = new Date(destination.date);
+              const formattedDate = isNaN(resultDate.getTime())
+                ? "Invalid Date"
+                : resultDate.toLocaleDateString();
+              return (
+                <div key={destination.id || index} className={styles.tableRow}>
+                  <span>{index + 1}</span>
+                  <span>{formattedDate}</span>
+                  <span>{destination.form.location || "N/A"}</span>
+                  <span>{destination.form.category || "N/A"}</span>
+                  <span>{destination.form.minBudget || "N/A"}</span>
+                  <span>{destination.form.maxBudget || "N/A"}</span>
+                  <span>
+                    <a
+                      href={`/recommendations/?resultsId=${destination.id}`}
+                      className={styles.seeResult}
+                    >
+                      View
+                    </a>
+                  </span>
+                </div>
+              );
+            })
+          ) : (
+            <div className={styles.noData}>No saved destinations</div>
+          )}
+        </div>
       </div>
     </div>
   );
