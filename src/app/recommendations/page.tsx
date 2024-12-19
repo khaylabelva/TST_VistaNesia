@@ -23,9 +23,11 @@ export default function RecommendationsPage() {
   const [showPopup, setShowPopup] = useState(false);
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [loading, setLoading] = useState(true);
-  
+  const [expandedCard, setExpandedCard] = useState<Destination | null>(null);
+
   useEffect(() => {
     const getUserData = async () => {
+      setLoading(true);
       const userData = await fetchUser();
       if (!userData) {
         window.location.href = '/auth/sign-in';
@@ -45,20 +47,28 @@ export default function RecommendationsPage() {
         setRecommendedDestinations(JSON.parse(storedRecommendations));
       }
     }
+    setLoading(false);
   }, []);
 
   useEffect(() => {
-    const carousel = carouselRef.current;
-    const handleScroll = () => {
-      if (!carousel) return;
-
-      const { scrollLeft, scrollWidth, clientWidth } = carousel;
-      setIsAtStart(scrollLeft === 0);
-      setIsAtEnd(scrollLeft + clientWidth >= scrollWidth);
-    };
-    carousel?.addEventListener('scroll', handleScroll);
-    return () => carousel?.removeEventListener('scroll', handleScroll);
-  }, []);
+    if (!loading) {
+      const carousel = carouselRef.current;
+      const handleScroll = () => {
+        if (!carousel) return;
+  
+        const { scrollLeft, scrollWidth, clientWidth } = carousel;
+        setIsAtStart(scrollLeft === 0);
+        setIsAtEnd(scrollLeft + clientWidth >= scrollWidth);
+      };
+  
+      if (carousel) {
+        handleScroll();
+        carousel.addEventListener('scroll', handleScroll);
+      }
+  
+      return () => carousel?.removeEventListener('scroll', handleScroll);
+    }
+  }, [loading]);  
 
   const scrollLeft = () => {
     const carousel = carouselRef.current;
@@ -75,8 +85,6 @@ export default function RecommendationsPage() {
       carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
-
-  const [expandedCard, setExpandedCard] = useState<Destination | null>(null);
 
   const handleViewDescription = (destination: Destination) => {
     setExpandedCard(destination);
@@ -95,11 +103,11 @@ export default function RecommendationsPage() {
     const formData = localStorage.getItem("clientFormData");
     if (formData) {
       const parsedFormData = JSON.parse(formData);
-  
+
       if (user) {
         const userKey = `recommendations_${user.email}`;
         const storedData = localStorage.getItem(userKey);
-  
+
         let existingData = [];
         try {
           existingData = storedData ? JSON.parse(storedData) : [];
@@ -109,21 +117,21 @@ export default function RecommendationsPage() {
         } catch (error) {
           console.error("Error parsing stored data:", error);
         }
-  
+
         const newRecommendation = {
           id: Date.now(),
           date: new Date().toISOString(),
           form: parsedFormData,
           recommendations: recommendedDestinations,
         };
-  
+
         const updatedData = [...existingData, newRecommendation];
         localStorage.setItem(userKey, JSON.stringify(updatedData));
       }
     }
-  
+
     window.location.href = "/homepage";
-  };    
+  };
 
   const handleCancelRedirect = () => {
     setShowPopup(false);
@@ -193,40 +201,44 @@ export default function RecommendationsPage() {
 
       {/* Recommendations Section */}
       <section className={styles.recommendations}>
-        {/* Previous Button */}
-        {!isAtStart && (
-          <button className={styles.prevButton} onClick={scrollLeft}>
-            <img src="/left-arrow.png" alt="Scroll Left" className={styles.arrowImage} />
-          </button>
-        )}
-        
-        <div className={styles.carouselWrapper}>
-          <div className={styles.carousel} ref={carouselRef}>
-            {recommendedDestinations.map((destination) => (
-              <div key={destination.id} className={styles.card}>
-                <div className={styles.cardContent}>
-                  <h3 className={styles.cardTitle}>{destination.name}</h3>
-                  <p className={styles.city}>{destination.city}</p>
-                  <div className={styles.details}>
-                    <p><strong>Category:</strong> {destination.category || 'N/A'}</p>
-                    <p><strong>Price:</strong> {destination.price ? `Rp ${destination.price}` : 'Rp 0'}</p>
-                    <p><strong>Rating:</strong> {destination.rating || 'N/A'}</p>
-                    <p><strong>Estimated Time:</strong>{' '}{destination.timeMinutes ? `${destination.timeMinutes} minutes` : '0 minutes'}</p>
-                  </div>
-                  <button className={styles.viewDescriptionButton} onClick={() => handleViewDescription(destination)}>
-                    View Description
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {!loading && (
+          <>
+            {/* Previous Button */}
+            {!isAtStart && recommendedDestinations.length > 1 && (
+              <button className={styles.prevButton} onClick={scrollLeft}>
+                <img src="/left-arrow.png" alt="Scroll Left" className={styles.arrowImage} />
+              </button>
+            )}
 
-        {/* Next Button */}
-        {!isAtEnd && recommendedDestinations.length > 1 && (
-          <button className={styles.nextButton} onClick={scrollRight}>
-            <img src="/right-arrow.png" alt="Scroll Right" className={styles.arrowImage} />
-          </button>
+            <div className={styles.carouselWrapper}>
+              <div className={styles.carousel} ref={carouselRef}>
+                {recommendedDestinations.map((destination) => (
+                  <div key={destination.id} className={styles.card}>
+                    <div className={styles.cardContent}>
+                      <h3 className={styles.cardTitle}>{destination.name}</h3>
+                      <p className={styles.city}>{destination.city}</p>
+                      <div className={styles.details}>
+                        <p><strong>Category:</strong> {destination.category || 'N/A'}</p>
+                        <p><strong>Price:</strong> {destination.price ? `Rp ${destination.price}` : 'Rp 0'}</p>
+                        <p><strong>Rating:</strong> {destination.rating || 'N/A'}</p>
+                        <p><strong>Estimated Time:</strong>{' '}{destination.timeMinutes ? `${destination.timeMinutes} minutes` : '0 minutes'}</p>
+                      </div>
+                      <button className={styles.viewDescriptionButton} onClick={() => handleViewDescription(destination)}>
+                        View Description
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Next Button */}
+            {!isAtEnd && recommendedDestinations.length > 1 && (
+              <button className={styles.nextButton} onClick={scrollRight}>
+                <img src="/right-arrow.png" alt="Scroll Right" className={styles.arrowImage} />
+              </button>
+            )}
+          </>
         )}
       </section>
 
