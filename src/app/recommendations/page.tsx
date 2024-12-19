@@ -141,7 +141,7 @@ export default function RecommendationsPage() {
           />
           <h2 className={styles.loadingTitle}>Hold on a moment!</h2>
           <p className={styles.loadingDescription}>
-            We’re finding the best destinations for you. It won’t take long, promise!
+            We&apos;re finding the best destinations for you. It won&apos;t take long, promise!
           </p>
         </div>
       </div>

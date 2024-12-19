@@ -52,9 +52,9 @@ export default function Homepage() {
             alt="Loading..."
             className={styles.loadingGif}
           />
-          <h2 className={styles.loadingTitle}>You’re All Set!</h2>
+          <h2 className={styles.loadingTitle}>You&apos;re All Set!</h2>
           <p className={styles.loadingDescription}>
-            We're taking you back to the homepage. See you there!
+            We&apos;re taking you back to the homepage. See you there!
           </p>
         </div>
       </div>
