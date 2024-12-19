@@ -44,7 +44,11 @@ export default function Homepage() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className={styles.loadingContainer}>
+        <img src="/loading.gif" alt="Loading..." className={styles.loadingGif} />
+      </div>
+    );
   }
 
   return (

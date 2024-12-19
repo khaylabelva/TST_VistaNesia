@@ -22,6 +22,7 @@ export default function RecommendationsPage() {
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
     const getUserData = async () => {
@@ -31,6 +32,7 @@ export default function RecommendationsPage() {
       } else {
         setUser(userData);
       }
+      setLoading(false);
     };
     getUserData();
   }, []);
@@ -127,6 +129,14 @@ export default function RecommendationsPage() {
     setShowPopup(false);
     window.location.href = '/homepage';
   };
+
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <img src="/loading.gif" alt="Loading..." className={styles.loadingGif} />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
