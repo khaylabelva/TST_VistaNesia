@@ -7,6 +7,7 @@ import { fetchUser } from "../auth/auth.action";
 const HistoryPage = () => {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [loading, setLoading] = useState(true);
+  const [savedDestinations, setSavedDestinations] = useState<any[]>([]);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -27,6 +28,16 @@ const HistoryPage = () => {
     getUserData();
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      const userKey = `recommendations_${user.email}`;
+      const storedRecommendations = localStorage.getItem(userKey);
+      if (storedRecommendations) {
+        setSavedDestinations(JSON.parse(storedRecommendations));
+      }
+    }
+  }, [user]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -39,7 +50,7 @@ const HistoryPage = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <a href="/homepage" className={styles.backToHome}>
-            ← Back to Home
+          ← Back to Home
         </a>
         <h1 className={styles.title}>My Profile</h1>
       </div>
@@ -62,19 +73,25 @@ const HistoryPage = () => {
           <span>Max Budget</span>
           <span>See Result</span>
         </div>
-        <div className={styles.tableRow}>
-          <span>1</span>
-          <span>2023-12-18</span>
-          <span>Bali</span>
-          <span>Vacation</span>
-          <span>$500</span>
-          <span>$1000</span>
-          <span>
-            <a href="#" className={styles.seeResult}>
-              View
-            </a>
-          </span>
-        </div>
+        {savedDestinations.length > 0 ? (
+          savedDestinations.map((destination, index) => (
+            <div key={destination.id} className={styles.tableRow}>
+              <span>{index + 1}</span>
+              <span>{new Date().toLocaleDateString()}</span>
+              <span>{destination.city}</span>
+              <span>{destination.category}</span>
+              <span>{destination.price}</span>
+              <span>{destination.price}</span>
+              <span>
+                <a href="#" className={styles.seeResult}>
+                  View
+                </a>
+              </span>
+            </div>
+          ))
+        ) : (
+          <div>No saved destinations</div>
+        )}
       </div>
     </div>
   );
